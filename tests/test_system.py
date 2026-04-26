@@ -8,29 +8,17 @@ class TestEndToEndNavigation:
 
     def test_complete_navigation_workflow(self, client):
         """Test navigating through all pages."""
-        # Step 1: Load the home page
         response = client.get("/")
         assert response.status_code == 200
         assert b"benkthomp" in response.data
 
-        # Step 2: Navigate to about
-        response = client.get("/about")
-        assert response.status_code == 200
-        assert b"About" in response.data
-
-        # Step 3: Navigate to projects
         response = client.get("/projects")
         assert response.status_code == 200
         assert b"Projects" in response.data
 
-        # Step 4: Navigate to contact
-        response = client.get("/contact")
-        assert response.status_code == 200
-        assert b"Contact" in response.data
-
     def test_all_pages_share_base_layout(self, client):
         """Test that all pages use the base template with navbar."""
-        pages = ["/", "/about", "/projects", "/contact"]
+        pages = ["/", "/projects"]
 
         for page in pages:
             response = client.get(page)
@@ -49,7 +37,6 @@ class TestRoadmapAdminWorkflow:
         return hashlib.sha256(raw.encode()).hexdigest()
 
     def test_full_toggle_workflow(self, roadmap_client, monkeypatch):
-        import benkthomp.roadmap as rm
 
         raw = "test-admin-secret"
         monkeypatch.setenv("ROADMAP_ADMIN_KEY", self._make_key(raw))

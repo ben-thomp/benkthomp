@@ -75,19 +75,30 @@ _yaml.preserve_quotes = True
 
 
 def _add_days(d: date, n: int) -> date:
+    """Returns the date that is n days after d."""
     return d + timedelta(days=n)
 
 
 def _is_weekend(d: date) -> bool:
+    """Returns True if d falls on Saturday or Sunday."""
     return d.isoweekday() in (6, 7)
 
 
 def _js_day_name(d: date) -> str:
+    """Returns the JavaScript-convention day abbreviation (Sun…Sat) for d."""
     return _JS_DAY_NAMES[d.isoweekday() % 7]
 
 
 def _progress_path(event_type: str, label: str) -> tuple[str, str] | None:
-    """Maps (event_type, label) to (cert_key, sub_key) in the YAML."""
+    """Maps a schedule event to its (cert_key, sub_key) path in the progress YAML.
+
+    Args:
+        event_type: Schedule event type (e.g. "genai", "study", "exam").
+        label: Event label; used to distinguish which cert an exam belongs to.
+
+    Returns:
+        A (cert_key, sub_key) tuple for YAML lookup, or None if unrecognized.
+    """
     if event_type == "genai":
         return ("genai", "sections")
     if event_type == "review":
@@ -108,6 +119,17 @@ def build_schedule(
     cpcu_start: date,
     cpcu_exam: date,
 ) -> dict[str, Any]:
+    """Builds the complete study schedule for Gen AI and CPCU 555.
+
+    Args:
+        genai_start: First day of Gen AI content study.
+        cpcu_start: First day of CPCU 555 section study.
+        cpcu_exam: Date of the CPCU 555 exam.
+
+    Returns:
+        Dict with keys "schedule" (ISO-date → event list), "phases" (Gantt bars),
+        "start_date", and "end_date".
+    """
     schedule: dict[str, list[dict]] = {}
     phases: list[dict] = []
 
@@ -243,24 +265,36 @@ def build_schedule(
 
 
 def seed_if_missing() -> None:
+    """Seeds the progress YAML from the template if it does not yet exist."""
     _INSTANCE_DIR.mkdir(parents=True, exist_ok=True)
     if not _PROGRESS_FILE.exists():
         shutil.copy(_TEMPLATE_FILE, _PROGRESS_FILE)
 
 
 def load_progress() -> Any:
+    """Loads and returns the progress YAML, seeding from the template if missing."""
     seed_if_missing()
     with open(_PROGRESS_FILE, encoding="utf-8") as f:
         return _yaml.load(f)
 
 
 def save_progress(data: Any) -> None:
+    """Writes the progress data back to the YAML file.
+
+    Args:
+        data: The progress data object returned by load_progress.
+    """
     _INSTANCE_DIR.mkdir(parents=True, exist_ok=True)
     with open(_PROGRESS_FILE, "w", encoding="utf-8") as f:
         _yaml.dump(data, f)
 
 
 def check_admin(key: str) -> bool:
+    """Returns True if the SHA-256 hash of key matches ROADMAP_ADMIN_KEY.
+
+    Args:
+        key: The raw admin key supplied by the client.
+    """
     expected = os.environ.get("ROADMAP_ADMIN_KEY", "")
     if not expected or not key:
         return False
@@ -268,6 +302,17 @@ def check_admin(key: str) -> bool:
 
 
 def toggle_section(phase_type: str, label: str, key: str) -> dict[str, Any]:
+    """Toggles the completion state of a schedule section in the progress YAML.
+
+    Args:
+        phase_type: Schedule event type (matches types used in build_schedule).
+        label: Section label to toggle; must exist in the progress YAML.
+        key: Raw admin key; must pass check_admin or returns an error dict.
+
+    Returns:
+        Dict with "complete" (bool) and "completed_on" (ISO date or None) on
+        success, or {"error": "unauthorized"} / {"error": "not found"} on failure.
+    """
     if not check_admin(key):
         return {"error": "unauthorized"}
 
@@ -289,6 +334,12 @@ def toggle_section(phase_type: str, label: str, key: str) -> dict[str, Any]:
 
 
 def get_page_data() -> dict[str, Any]:
+    """Loads progress, builds the schedule, and returns the roadmap template context.
+
+    Returns:
+        Dict with "schedule_data" (built schedule or None on config error),
+        "genai_pct" (int 0–100), and "cpcu_pct" (int 0–100).
+    """
     progress_data = load_progress()
 
     try:

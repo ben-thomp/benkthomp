@@ -83,7 +83,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 60vh;
+  min-height: 40vh;
 }
 
 .hero h1 {
@@ -98,14 +98,14 @@ a:hover {
 
 /* Page sections */
 .page-section {
-  padding: 2rem 0;
+  padding: 0.75rem 0 2rem;
 }
 
 .page-section h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid #30363d;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.65rem;
 }
 
 .page-section p {
@@ -128,6 +128,51 @@ a:hover {
   text-align: center;
   color: #8b949e;
   font-size: 0.875rem;
+}
+
+/* Section label (small uppercase heading) */
+.section-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+/* Project cards */
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.project-card {
+  display: block;
+  padding: 1rem 1.25rem;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.project-card:hover {
+  border-color: #8b949e;
+  text-decoration: none;
+}
+
+.project-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f0f6fc;
+  margin-bottom: 0.35rem;
+}
+
+.project-card-desc {
+  font-size: 0.85rem;
+  color: #8b949e;
+  line-height: 1.5;
 }
 
 /* Responsive */

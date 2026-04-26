@@ -1,3 +1,8 @@
+/* ── Roadmap header ───────────────────────────────────────────────────────── */
+.page-subtitle {
+  margin-bottom: 1rem;
+}
+
 /* ── Cert progress bars ───────────────────────────────────────────────────── */
 .cert-progress-section {
   display: flex;
@@ -39,29 +44,6 @@
   text-align: right;
   color: #8b949e;
   font-variant-numeric: tabular-nums;
-}
-
-/* ── Legend ───────────────────────────────────────────────────────────────── */
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 1.25rem;
-}
-
-.leg-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  color: #8b949e;
-}
-
-.leg-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  flex-shrink: 0;
 }
 
 /* ── Section title ────────────────────────────────────────────────────────── */
@@ -127,6 +109,30 @@
   z-index: 2;
 }
 
+/* ── Legend ───────────────────────────────────────────────────────────────── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.leg-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #8b949e;
+}
+
+.leg-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
 /* ── Calendar ─────────────────────────────────────────────────────────────── */
 .month-block {
   margin-bottom: 0;
@@ -159,7 +165,7 @@
   border: 1px solid #21262d;
   padding: 4px 5px;
   width: 14.28%;
-  height: 72px;
+  height: 96px;
 }
 
 .cal-grid tr:first-child td {
@@ -182,7 +188,6 @@ td.weekend {
 }
 
 td.out-of-range {
-  border-color: transparent;
   background: transparent;
 }
 
@@ -338,42 +343,6 @@ td.out-of-range {
 .btn-secondary:hover {
   color: #f0f6fc;
   border-color: #8b949e;
-}
-
-/* ── Project cards (projects page) ───────────────────────────────────────── */
-.project-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
-}
-
-.project-card {
-  display: block;
-  padding: 1rem 1.25rem;
-  background: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: border-color 0.15s;
-}
-
-.project-card:hover {
-  border-color: #8b949e;
-  text-decoration: none;
-}
-
-.project-card-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #f0f6fc;
-  margin-bottom: 0.35rem;
-}
-
-.project-card-desc {
-  font-size: 0.85rem;
-  color: #8b949e;
-  line-height: 1.5;
 }
 
 /* ── Responsive ───────────────────────────────────────────────────────────── */

@@ -1,10 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}benkthomp - Home{% endblock %}
+{% block title %}benkthomp{% endblock %}
 
 {% block content %}
 <section class="hero">
   <h1>benkthomp</h1>
-  <p class="hero-subtitle">Coming soon</p>
+  <p class="hero-subtitle">Building tools. Earning certifications.</p>
+</section>
+
+<section class="page-section">
+  <p class="section-label">Projects</p>
+  <div class="project-list">
+    <a href="{{ url_for('roadmap') }}" class="project-card">
+      <div class="project-card-title">Certification Roadmap</div>
+      <div class="project-card-desc">
+        Interactive study calendar tracking Gen AI and CPCU 555 certification progress —
+        Gantt timeline, month-by-month calendar, and per-certification progress bars.
+      </div>
+    </a>
+  </div>
 </section>
 {% endblock %}

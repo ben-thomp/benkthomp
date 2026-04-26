@@ -2,12 +2,20 @@
 
 import os
 from pathlib import Path
+from typing import Any
 
 from flask import Flask, jsonify, render_template, request
 
 
-def create_app(config=None):
-    """Application factory for creating Flask app instances."""
+def create_app(config: dict[str, Any] | None = None) -> Flask:
+    """Creates and configures a Flask application instance.
+
+    Args:
+        config: Optional config overrides applied after env-based defaults.
+
+    Returns:
+        A configured Flask application.
+    """
     project_root = Path(__file__).parent.parent.parent
     template_folder = project_root / "templates"
     static_folder = project_root / "static"
@@ -31,28 +39,20 @@ def create_app(config=None):
     return app
 
 
-def register_routes(app):
-    """Register all application routes."""
+def register_routes(app: Flask) -> None:
+    """Registers all application routes on the given Flask app.
+
+    Args:
+        app: The Flask application instance to register routes on.
+    """
 
     @app.route("/")
     def index():
-        """Render the home page."""
         return render_template("index.html")
-
-    @app.route("/about")
-    def about():
-        """Render the about page."""
-        return render_template("about.html")
 
     @app.route("/projects")
     def projects():
-        """Render the projects page."""
         return render_template("projects.html")
-
-    @app.route("/contact")
-    def contact():
-        """Render the contact page."""
-        return render_template("contact.html")
 
     @app.route("/roadmap")
     def roadmap():

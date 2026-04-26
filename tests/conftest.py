@@ -22,8 +22,9 @@ def client(app):
 
 @pytest.fixture
 def roadmap_client(client, tmp_path, monkeypatch):
-    import benkthomp.roadmap as rm
     from ruamel.yaml import YAML
+
+    import benkthomp.roadmap as rm
 
     progress_file = tmp_path / "roadmap_progress.yaml"
     shutil.copy(rm._TEMPLATE_FILE, progress_file)

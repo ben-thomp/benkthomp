@@ -9,6 +9,7 @@ dependencies = [
     "flask>=3.0.0",
     "python-dotenv>=1.0.0",
     "gunicorn>=21.2.0",
+    "ruamel.yaml>=0.18.0",
 ]
 
 [project.optional-dependencies]
@@ -21,15 +22,11 @@ dev = [
 ]
 
 [build-system]
-requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools]
-package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
-namespaces = false
+[tool.hatch.build.targets.wheel]
+packages = ["src/benkthomp"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -3,7 +3,7 @@
 import os
 from pathlib import Path
 
-from flask import Flask, render_template
+from flask import Flask, jsonify, render_template, request
 
 
 def create_app(config=None):
@@ -53,6 +53,36 @@ def register_routes(app):
     def contact():
         """Render the contact page."""
         return render_template("contact.html")
+
+    @app.route("/roadmap")
+    def roadmap():
+        from benkthomp.roadmap import get_page_data
+
+        return render_template("roadmap.html", **get_page_data())
+
+    @app.route("/api/roadmap/auth", methods=["POST"])
+    def roadmap_auth():
+        from benkthomp.roadmap import check_admin
+
+        key = request.json.get("key", "") if request.is_json else ""
+        return jsonify({"ok": check_admin(key)})
+
+    @app.route("/api/roadmap/toggle", methods=["POST"])
+    def roadmap_toggle():
+        from benkthomp.roadmap import toggle_section
+
+        if not request.is_json:
+            return jsonify({"error": "bad request"}), 400
+        key = request.headers.get("X-Admin-Key", "")
+        result = toggle_section(
+            request.json.get("type", ""),
+            request.json.get("label", ""),
+            key,
+        )
+        if "error" in result:
+            status = 401 if result["error"] == "unauthorized" else 400
+            return jsonify(result), status
+        return jsonify(result)
 
 
 if __name__ == "__main__":

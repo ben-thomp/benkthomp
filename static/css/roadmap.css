@@ -1,0 +1,384 @@
+/* ── Cert progress bars ───────────────────────────────────────────────────── */
+.cert-progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+
+.cert-progress-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.cert-progress-label {
+  width: 68px;
+  color: #8b949e;
+  flex-shrink: 0;
+}
+
+.cert-progress-track {
+  flex: 1;
+  height: 8px;
+  background: #21262d;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cert-progress-fill {
+  height: 100%;
+  background: #238636;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.cert-progress-pct {
+  width: 36px;
+  text-align: right;
+  color: #8b949e;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Legend ───────────────────────────────────────────────────────────────── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.leg-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #8b949e;
+}
+
+.leg-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Section title ────────────────────────────────────────────────────────── */
+.section-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 1.5rem 0 0.75rem;
+}
+
+/* ── Gantt chart ──────────────────────────────────────────────────────────── */
+.gantt-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.gantt-table {
+  border-collapse: collapse;
+}
+
+.gantt-table td,
+.gantt-table th {
+  padding: 0;
+}
+
+.gantt-label {
+  font-size: 0.75rem;
+  color: #8b949e;
+  white-space: nowrap;
+  padding: 4px 12px 4px 0;
+  width: 120px;
+  vertical-align: middle;
+}
+
+.gantt-bar-cell {
+  position: relative;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.gantt-bar {
+  position: absolute;
+  top: 5px;
+  height: 20px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  font-size: 10px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.gantt-today-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: #f85149;
+  z-index: 2;
+}
+
+/* ── Calendar ─────────────────────────────────────────────────────────────── */
+.month-block {
+  margin-bottom: 0;
+}
+
+.month-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f0f6fc;
+  padding: 10px 0 5px;
+  border-top: 1px solid #30363d;
+}
+
+.cal-grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cal-grid th {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #8b949e;
+  text-align: center;
+  padding: 4px 2px 6px;
+  border-bottom: 1px solid #30363d;
+}
+
+.cal-grid td {
+  vertical-align: top;
+  border: 1px solid #21262d;
+  padding: 4px 5px;
+  width: 14.28%;
+  height: 72px;
+}
+
+.cal-grid tr:first-child td {
+  border-top: none;
+}
+
+.day-num {
+  font-size: 0.7rem;
+  color: #8b949e;
+  margin-bottom: 3px;
+}
+
+.day-num.today {
+  font-weight: 700;
+  color: #58a6ff;
+}
+
+td.weekend {
+  background: #0d1117;
+}
+
+td.out-of-range {
+  border-color: transparent;
+  background: transparent;
+}
+
+/* ── Pill events ──────────────────────────────────────────────────────────── */
+.pill {
+  font-size: 10px;
+  border-radius: 3px;
+  padding: 1px 4px;
+  margin-bottom: 2px;
+  line-height: 1.4;
+  display: block;
+  font-weight: 500;
+  user-select: none;
+}
+
+.pill-genai   { background: #B5D4F4; color: #0C447C; }
+.pill-review  { background: #C0DD97; color: #27500A; }
+.pill-ilc     { background: #FAC775; color: #633806; }
+.pill-study   { background: #CECBF6; color: #3C3489; }
+.pill-exam    { background: #F7C1C1; color: #791F1F; }
+.pill-cpcu    { background: #F4C0D1; color: #72243E; }
+.pill-buffer  { background: #D3D1C7; color: #444441; }
+
+.pill-complete {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+
+.pill-check {
+  text-decoration: none;
+  display: inline;
+  margin-right: 2px;
+  font-style: normal;
+}
+
+/* Admin mode: clickable pills */
+.admin-active .pill {
+  cursor: pointer;
+}
+
+.admin-active .pill:hover {
+  filter: brightness(0.88);
+}
+
+/* ── Admin lock icon ──────────────────────────────────────────────────────── */
+.admin-lock {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #8b949e;
+  line-height: 1;
+  z-index: 100;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.admin-lock:hover {
+  border-color: #8b949e;
+  color: #f0f6fc;
+}
+
+/* ── Auth modal ───────────────────────────────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.visible {
+  display: flex;
+}
+
+.modal-box {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f0f6fc;
+}
+
+.modal-input {
+  font-size: 0.875rem;
+  padding: 7px 10px;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  background: #0d1117;
+  color: #f0f6fc;
+  width: 100%;
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+}
+
+.modal-error {
+  display: none;
+  font-size: 0.8rem;
+  color: #f85149;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ── Buttons (scoped to roadmap) ──────────────────────────────────────────── */
+.btn-primary {
+  padding: 7px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: #238636;
+  color: #fff;
+  border: 1px solid #2ea043;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #2ea043;
+}
+
+.btn-secondary {
+  padding: 7px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: transparent;
+  color: #8b949e;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  color: #f0f6fc;
+  border-color: #8b949e;
+}
+
+/* ── Project cards (projects page) ───────────────────────────────────────── */
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.project-card {
+  display: block;
+  padding: 1rem 1.25rem;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.project-card:hover {
+  border-color: #8b949e;
+  text-decoration: none;
+}
+
+.project-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f0f6fc;
+  margin-bottom: 0.35rem;
+}
+
+.project-card-desc {
+  font-size: 0.85rem;
+  color: #8b949e;
+  line-height: 1.5;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .cal-grid td {
+    height: 56px;
+  }
+}

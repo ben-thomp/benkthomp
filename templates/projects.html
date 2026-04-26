@@ -5,6 +5,14 @@
 {% block content %}
 <section class="page-section">
   <h1>Projects</h1>
-  <p>Projects coming soon.</p>
+  <div class="project-list">
+    <a href="{{ url_for('roadmap') }}" class="project-card">
+      <div class="project-card-title">Certification Roadmap</div>
+      <div class="project-card-desc">
+        Interactive study calendar tracking Gen AI and CPCU 555 certification progress —
+        Gantt timeline, month-by-month calendar, and per-certification progress bars.
+      </div>
+    </a>
+  </div>
 </section>
 {% endblock %}

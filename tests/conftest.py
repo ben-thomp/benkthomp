@@ -1,5 +1,7 @@
 """Pytest configuration and fixtures."""
 
+import shutil
+
 import pytest
 
 from benkthomp.app import create_app
@@ -16,3 +18,25 @@ def app():
 def client(app):
     """Create a test client for the Flask app."""
     return app.test_client()
+
+
+@pytest.fixture
+def roadmap_client(client, tmp_path, monkeypatch):
+    import benkthomp.roadmap as rm
+    from ruamel.yaml import YAML
+
+    progress_file = tmp_path / "roadmap_progress.yaml"
+    shutil.copy(rm._TEMPLATE_FILE, progress_file)
+    y = YAML()
+    y.preserve_quotes = True
+    with open(progress_file, encoding="utf-8") as f:
+        data = y.load(f)
+    data["genai"]["config"]["start"] = "2026-04-20"
+    data["genai"]["config"]["exam"] = "2026-06-12"
+    data["cpcu555"]["config"]["start"] = "2026-06-19"
+    data["cpcu555"]["config"]["exam"] = "2026-07-15"
+    with open(progress_file, "w", encoding="utf-8") as f:
+        y.dump(data, f)
+    monkeypatch.setattr(rm, "_INSTANCE_DIR", tmp_path)
+    monkeypatch.setattr(rm, "_PROGRESS_FILE", progress_file)
+    return client

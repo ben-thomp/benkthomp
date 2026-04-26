@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}benkthomp - Certification Roadmap{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/roadmap.css') }}" />
+{% endblock %}
+
+{% block content %}
+<section class="page-section">
+  <div class="roadmap-header">
+    <h1>Certification Roadmap</h1>
+    <p class="page-subtitle">Gen AI &amp; CPCU 555 study schedule.</p>
+  </div>
+
+  {% if schedule_data %}
+
+  <div class="cert-progress-section">
+    <div class="cert-progress-item">
+      <span class="cert-progress-label">Gen AI</span>
+      <div class="cert-progress-track">
+        <div class="cert-progress-fill" id="genai-bar" style="width: {{ genai_pct }}%"></div>
+      </div>
+      <span class="cert-progress-pct" id="genai-pct">{{ genai_pct }}%</span>
+    </div>
+    <div class="cert-progress-item">
+      <span class="cert-progress-label">CPCU 555</span>
+      <div class="cert-progress-track">
+        <div class="cert-progress-fill" id="cpcu-bar" style="width: {{ cpcu_pct }}%"></div>
+      </div>
+      <span class="cert-progress-pct" id="cpcu-pct">{{ cpcu_pct }}%</span>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><span class="leg-dot" style="background:#B5D4F4"></span>Gen AI content</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#C0DD97"></span>Review</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#FAC775"></span>Online Course</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#CECBF6"></span>Study</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#F7C1C1"></span>Exam</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#F4C0D1"></span>CPCU 555</div>
+  </div>
+
+  <div class="section-title">Timeline</div>
+  <div class="gantt-wrap">
+    <div id="gantt-out"></div>
+  </div>
+
+  <div class="section-title">Calendar</div>
+  <div id="calendar-out"></div>
+
+  {% else %}
+  <p class="page-subtitle muted">Schedule not yet configured. Update <code>instance/roadmap_progress.yaml</code> with valid start and exam dates.</p>
+  {% endif %}
+</section>
+
+<button class="admin-lock" id="admin-lock" title="Admin">&#128274;</button>
+
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal-box">
+    <div class="modal-title">Admin Access</div>
+    <input class="modal-input" type="password" id="admin-key-input" placeholder="Admin key" autocomplete="off" />
+    <p class="modal-error" id="auth-error">Invalid key — try again.</p>
+    <div class="modal-actions">
+      <button class="btn-primary" id="auth-submit">Unlock</button>
+      <button class="btn-secondary" id="auth-cancel">Cancel</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if schedule_data %}
+<script>
+  window.SCHEDULE_DATA = {{ schedule_data | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/roadmap.js') }}"></script>
+{% endif %}
+{% endblock %}

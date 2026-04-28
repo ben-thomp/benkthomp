@@ -32,10 +32,10 @@ def roadmap_client(client, tmp_path, monkeypatch):
     y.preserve_quotes = True
     with open(progress_file, encoding="utf-8") as f:
         data = y.load(f)
-    data["genai"]["config"]["start"] = "2026-04-20"
-    data["genai"]["config"]["exam"] = "2026-06-12"
-    data["cpcu555"]["config"]["start"] = "2026-06-19"
-    data["cpcu555"]["config"]["exam"] = "2026-07-15"
+    data["certs"]["genai"]["config"]["start"] = "2026-04-20"
+    data["certs"]["genai"]["config"]["exam"] = "2026-06-12"
+    data["certs"]["cpcu555"]["config"]["start"] = "2026-06-19"
+    data["certs"]["cpcu555"]["config"]["exam"] = "2026-07-15"
     with open(progress_file, "w", encoding="utf-8") as f:
         y.dump(data, f)
     monkeypatch.setattr(rm, "_INSTANCE_DIR", tmp_path)

@@ -1,13 +1,8 @@
-"""System tests for end-to-end functionality."""
-
 import hashlib
 
 
 class TestEndToEndNavigation:
-    """System tests for the complete navigation workflow."""
-
     def test_complete_navigation_workflow(self, client):
-        """Test navigating through all pages."""
         response = client.get("/")
         assert response.status_code == 200
         assert b"benkthomp" in response.data
@@ -17,27 +12,21 @@ class TestEndToEndNavigation:
         assert b"Projects" in response.data
 
     def test_all_pages_share_base_layout(self, client):
-        """Test that all pages use the base template with navbar."""
         pages = ["/", "/projects"]
 
         for page in pages:
             response = client.get(page)
             assert response.status_code == 200
             assert response.content_type.startswith("text/html")
-            # All pages should have the navbar
             assert b"nav" in response.data.lower()
-            # All pages should link to the stylesheet
             assert b"style.css" in response.data
 
 
 class TestRoadmapAdminWorkflow:
-    """System tests for the roadmap admin toggle workflow."""
-
     def _make_key(self, raw: str) -> str:
         return hashlib.sha256(raw.encode()).hexdigest()
 
     def test_full_toggle_workflow(self, roadmap_client, monkeypatch):
-
         raw = "test-admin-secret"
         monkeypatch.setenv("ROADMAP_ADMIN_KEY", self._make_key(raw))
 

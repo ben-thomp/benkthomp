@@ -9,45 +9,40 @@
 {% block content %}
 <section class="page-section">
   <div class="roadmap-header">
-    <h1>Certification Roadmap</h1>
-    <p class="page-subtitle">Gen AI &amp; CPCU 555 study schedule.</p>
+    <div>
+      <h1>Certification Roadmap</h1>
+      <p class="page-subtitle">Gen AI &amp; CPCU 555 study schedule.</p>
+    </div>
   </div>
 
   {% if schedule_data %}
 
-  <div class="cert-progress-section">
-    <div class="cert-progress-item">
-      <span class="cert-progress-label">Gen AI</span>
-      <div class="cert-progress-track">
-        <div class="cert-progress-fill" id="genai-bar" style="width: {{ genai_pct }}%"></div>
+  <div class="roadmap-card">
+    <div class="cert-progress-section">
+      {% for cert_key, cp in cert_progress.items() %}
+      <div class="cert-progress-item">
+        <span class="cert-progress-label">{{ cp.label }}</span>
+        <div class="cert-progress-track">
+          <div class="cert-progress-fill" id="{{ cert_key }}-bar" style="width: {{ cp.pct }}%"></div>
+        </div>
+        <span class="cert-progress-pct" id="{{ cert_key }}-pct">{{ cp.pct }}%</span>
       </div>
-      <span class="cert-progress-pct" id="genai-pct">{{ genai_pct }}%</span>
-    </div>
-    <div class="cert-progress-item">
-      <span class="cert-progress-label">CPCU 555</span>
-      <div class="cert-progress-track">
-        <div class="cert-progress-fill" id="cpcu-bar" style="width: {{ cpcu_pct }}%"></div>
-      </div>
-      <span class="cert-progress-pct" id="cpcu-pct">{{ cpcu_pct }}%</span>
+      {% endfor %}
     </div>
   </div>
 
-  <div class="section-title">Timeline</div>
-  <div class="gantt-wrap">
-    <div id="gantt-out"></div>
+  <div class="roadmap-card">
+    <div class="section-title">Timeline</div>
+    <div class="gantt-wrap">
+      <div id="gantt-out"></div>
+    </div>
+    <div class="legend" id="legend-out"></div>
   </div>
 
-  <div class="legend">
-    <div class="leg-item"><span class="leg-dot" style="background:#B5D4F4"></span>Gen AI content</div>
-    <div class="leg-item"><span class="leg-dot" style="background:#C0DD97"></span>Review</div>
-    <div class="leg-item"><span class="leg-dot" style="background:#FAC775"></span>Online Course</div>
-    <div class="leg-item"><span class="leg-dot" style="background:#CECBF6"></span>Study</div>
-    <div class="leg-item"><span class="leg-dot" style="background:#F7C1C1"></span>Exam</div>
-    <div class="leg-item"><span class="leg-dot" style="background:#F4C0D1"></span>CPCU 555</div>
+  <div class="roadmap-card">
+    <div class="section-title">Calendar</div>
+    <div id="calendar-out"></div>
   </div>
-
-  <div class="section-title">Calendar</div>
-  <div id="calendar-out"></div>
 
   {% else %}
   <p class="page-subtitle muted">Schedule not yet configured. Update <code>instance/roadmap_progress.yaml</code> with valid start and exam dates.</p>

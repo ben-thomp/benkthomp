@@ -1,376 +1,492 @@
-genai:
-  config:
-    start: "YYYY-MM-DD"  # TODO: set actual Gen AI study start date
-    exam: "YYYY-MM-DD"   # reference only — exam date is computed from start
-  sections:
-    "1.1":
-      complete: false
-      completed_on:
-      target:
-    "1.1.1":
-      complete: false
-      completed_on:
-      target:
-    "1.1.2":
-      complete: false
-      completed_on:
-      target:
-    "1.1.3":
-      complete: false
-      completed_on:
-      target:
-    "1.1.4":
-      complete: false
-      completed_on:
-      target:
-    "1.2":
-      complete: false
-      completed_on:
-      target:
-    "1.2.1":
-      complete: false
-      completed_on:
-      target:
-    "1.2.2":
-      complete: false
-      completed_on:
-      target:
-    "2.1":
-      complete: false
-      completed_on:
-      target:
-    "2.1.1":
-      complete: false
-      completed_on:
-      target:
-    "2.1.2":
-      complete: false
-      completed_on:
-      target:
-    "2.1.3":
-      complete: false
-      completed_on:
-      target:
-    "2.2":
-      complete: false
-      completed_on:
-      target:
-    "2.2.1":
-      complete: false
-      completed_on:
-      target:
-    "2.2.2":
-      complete: false
-      completed_on:
-      target:
-    "2.2.3":
-      complete: false
-      completed_on:
-      target:
-    "2.2.4":
-      complete: false
-      completed_on:
-      target:
-    "2.2.5":
-      complete: false
-      completed_on:
-      target:
-    "2.3":
-      complete: false
-      completed_on:
-      target:
-    "2.3.1":
-      complete: false
-      completed_on:
-      target:
-    "2.3.2":
-      complete: false
-      completed_on:
-      target:
-    "3.1":
-      complete: false
-      completed_on:
-      target:
-    "3.1.1":
-      complete: false
-      completed_on:
-      target:
-    "3.1.2":
-      complete: false
-      completed_on:
-      target:
-    "3.1.3":
-      complete: false
-      completed_on:
-      target:
-    "3.1.4":
-      complete: false
-      completed_on:
-      target:
-    "3.2":
-      complete: false
-      completed_on:
-      target:
-    "3.2.1":
-      complete: false
-      completed_on:
-      target:
-    "3.2.2":
-      complete: false
-      completed_on:
-      target:
-    "3.2.3":
-      complete: false
-      completed_on:
-      target:
-    "3.3":
-      complete: false
-      completed_on:
-      target:
-    "3.3.1":
-      complete: false
-      completed_on:
-      target:
-    "3.4":
-      complete: false
-      completed_on:
-      target:
-    "3.4.1":
-      complete: false
-      completed_on:
-      target:
-    "4.1":
-      complete: false
-      completed_on:
-      target:
-    "4.1.1":
-      complete: false
-      completed_on:
-      target:
-    "4.1.2":
-      complete: false
-      completed_on:
-      target:
-    "4.1.3":
-      complete: false
-      completed_on:
-      target:
-    "4.2":
-      complete: false
-      completed_on:
-      target:
-    "4.2.1":
-      complete: false
-      completed_on:
-      target:
-    "4.2.2":
-      complete: false
-      completed_on:
-      target:
-    "5.1":
-      complete: false
-      completed_on:
-      target:
-    "5.1.1":
-      complete: false
-      completed_on:
-      target:
-    "5.1.2":
-      complete: false
-      completed_on:
-      target:
-    "5.1.3":
-      complete: false
-      completed_on:
-      target:
-    "5.1.4":
-      complete: false
-      completed_on:
-      target:
-    "5.2":
-      complete: false
-      completed_on:
-      target:
-    "5.2.1":
-      complete: false
-      completed_on:
-      target:
-    "5.2.2":
-      complete: false
-      completed_on:
-      target:
-    "5.2.3":
-      complete: false
-      completed_on:
-      target:
+types:
+  genai:
+    label: "Gen AI"
+    color_fill: "B5D4F4"
+    color_text: "0C447C"
   review:
-    "Review 1":
-      complete: false
-      completed_on:
-      target:
-    "Review 2":
-      complete: false
-      completed_on:
-      target:
-    "Review 3":
-      complete: false
-      completed_on:
-      target:
-    "Review 4":
-      complete: false
-      completed_on:
-      target:
-    "Review 5":
-      complete: false
-      completed_on:
-      target:
-    "Review 6":
-      complete: false
-      completed_on:
-      target:
-  online_course:
-    "Online Course":
-      complete: false
-      completed_on:
-      target:
+    label: "Review"
+    color_fill: "C0DD97"
+    color_text: "27500A"
+  course:
+    label: "Online Course"
+    color_fill: "FAC775"
+    color_text: "633806"
   study:
-    "Study":
-      complete: false
-      completed_on:
-      target:
+    label: "Study"
+    color_fill: "CECBF6"
+    color_text: "3C3489"
   exam:
-    "GenAI Exam":
-      complete: false
-      completed_on:
-      target:
+    label: "Exam"
+    color_fill: "F7C1C1"
+    color_text: "791F1F"
+  cpcu:
+    label: "CPCU 555"
+    color_fill: "F4C0D1"
+    color_text: "72243E"
 
-cpcu555:
-  config:
-    start: "YYYY-MM-DD"  # TODO: set actual CPCU study start date
-    exam: "YYYY-MM-DD"   # TODO: set actual CPCU exam date
-  sections:
-    "1.1":
-      complete: false
-      completed_on:
-      target:
-    "1.2":
-      complete: false
-      completed_on:
-      target:
-    "1.3":
-      complete: false
-      completed_on:
-      target:
-    "1.4":
-      complete: false
-      completed_on:
-      target:
-    "1.5":
-      complete: false
-      completed_on:
-      target:
-    "1.6":
-      complete: false
-      completed_on:
-      target:
-    "2.1":
-      complete: false
-      completed_on:
-      target:
-    "2.2":
-      complete: false
-      completed_on:
-      target:
-    "2.3":
-      complete: false
-      completed_on:
-      target:
-    "2.4":
-      complete: false
-      completed_on:
-      target:
-    "2.5":
-      complete: false
-      completed_on:
-      target:
-    "3.1":
-      complete: false
-      completed_on:
-      target:
-    "3.2":
-      complete: false
-      completed_on:
-      target:
-    "3.3":
-      complete: false
-      completed_on:
-      target:
-    "3.4":
-      complete: false
-      completed_on:
-      target:
-    "3.5":
-      complete: false
-      completed_on:
-      target:
-    "3.6":
-      complete: false
-      completed_on:
-      target:
-    "4.1":
-      complete: false
-      completed_on:
-      target:
-    "4.2":
-      complete: false
-      completed_on:
-      target:
-    "4.3":
-      complete: false
-      completed_on:
-      target:
-    "4.4":
-      complete: false
-      completed_on:
-      target:
-    "5.1":
-      complete: false
-      completed_on:
-      target:
-    "5.2":
-      complete: false
-      completed_on:
-      target:
-    "5.3":
-      complete: false
-      completed_on:
-      target:
-    "5.4":
-      complete: false
-      completed_on:
-      target:
-    "5.5":
-      complete: false
-      completed_on:
-      target:
-    "6.1":
-      complete: false
-      completed_on:
-      target:
-    "6.2":
-      complete: false
-      completed_on:
-      target:
-    "6.3":
-      complete: false
-      completed_on:
-      target:
-    "6.4":
-      complete: false
-      completed_on:
-      target:
-  exam:
-    "CPCU 555 Exam":
-      complete: false
-      completed_on:
-      target:
+certs:
+  genai:
+    label: "Gen AI"
+    config:
+      start: "YYYY-MM-DD"
+      exam: "YYYY-MM-DD"
+    sections:
+      "1.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "1.1.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "1.1.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "1.1.3":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "1.1.4":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "1.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "1.2.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "1.2.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.1.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.1.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.1.3":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.2.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.2.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.2.3":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.2.4":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.2.5":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.3":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.3.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "2.3.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.1.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.1.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.1.3":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.1.4":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.2.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.2.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.2.3":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.3":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.3.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.4":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "3.4.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "4.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "4.1.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "4.1.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "4.1.3":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "4.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "4.2.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "4.2.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "5.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "5.1.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "5.1.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "5.1.3":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "5.1.4":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "5.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "5.2.1":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "5.2.2":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "5.2.3":
+        type: genai
+        complete: false
+        completed_on:
+        target:
+      "Review 1":
+        type: review
+        complete: false
+        completed_on:
+        target:
+      "Review 2":
+        type: review
+        complete: false
+        completed_on:
+        target:
+      "Review 3":
+        type: review
+        complete: false
+        completed_on:
+        target:
+      "Review 4":
+        type: review
+        complete: false
+        completed_on:
+        target:
+      "Review 5":
+        type: review
+        complete: false
+        completed_on:
+        target:
+      "Review 6":
+        type: review
+        complete: false
+        completed_on:
+        target:
+      "Online Course":
+        type: course
+        duration_days: 2
+        complete: false
+        completed_on:
+        target:
+      "Study":
+        type: study
+        duration_days: 2
+        complete: false
+        completed_on:
+        target:
+      "GenAI Exam":
+        type: exam
+        complete: false
+        completed_on:
+        target:
+
+  cpcu555:
+    label: "CPCU 555"
+    config:
+      start: "YYYY-MM-DD"
+      exam: "YYYY-MM-DD"
+    sections:
+      "1.1":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "1.2":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "1.3":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "1.4":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "1.5":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "1.6":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "2.1":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "2.2":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "2.3":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "2.4":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "2.5":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "3.1":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "3.2":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "3.3":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "3.4":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "3.5":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "3.6":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "4.1":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "4.2":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "4.3":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "4.4":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "5.1":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "5.2":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "5.3":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "5.4":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "5.5":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "6.1":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "6.2":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "6.3":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "6.4":
+        type: cpcu
+        complete: false
+        completed_on:
+        target:
+      "CPCU 555 Exam":
+        type: exam
+        complete: false
+        completed_on:
+        target:

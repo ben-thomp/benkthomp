@@ -1,58 +1,38 @@
-"""Integration tests for Flask routes."""
-
-
 class TestHomeRoute:
-    """Integration tests for the home page."""
-
     def test_home_route_exists(self, client):
-        """Test that the home route is accessible."""
         response = client.get("/")
         assert response.status_code == 200
 
     def test_home_route_returns_html(self, client):
-        """Test that the home route returns HTML content."""
         response = client.get("/")
         assert response.content_type.startswith("text/html")
 
     def test_home_page_contains_site_name(self, client):
-        """Test that the home page contains the site name."""
         response = client.get("/")
         assert b"benkthomp" in response.data
 
 
-
 class TestProjectsRoute:
-    """Integration tests for the projects page."""
-
     def test_projects_route_exists(self, client):
-        """Test that the projects route is accessible."""
         response = client.get("/projects")
         assert response.status_code == 200
 
     def test_projects_route_returns_html(self, client):
-        """Test that the projects route returns HTML content."""
         response = client.get("/projects")
         assert response.content_type.startswith("text/html")
 
     def test_projects_page_contains_heading(self, client):
-        """Test that the projects page contains the Projects heading."""
         response = client.get("/projects")
         assert b"Projects" in response.data
 
 
-
 class TestStaticFiles:
-    """Integration tests for static file serving."""
-
     def test_static_css_accessible(self, client):
-        """Test that CSS files are accessible."""
         response = client.get("/static/css/style.css")
         assert response.status_code == 200
 
 
 class TestRoadmapRoute:
-    """Integration tests for the roadmap page."""
-
     def test_roadmap_route_exists(self, roadmap_client):
         response = roadmap_client.get("/roadmap")
         assert response.status_code == 200
@@ -76,8 +56,6 @@ class TestRoadmapRoute:
 
 
 class TestRoadmapAPI:
-    """Integration tests for roadmap API endpoints."""
-
     def test_auth_rejects_missing_key(self, roadmap_client):
         response = roadmap_client.post(
             "/api/roadmap/auth",

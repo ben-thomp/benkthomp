@@ -4,7 +4,10 @@ import os
 from pathlib import Path
 from typing import Any
 
+from dotenv import load_dotenv
 from flask import Flask, jsonify, render_template, request
+
+load_dotenv()
 
 
 def create_app(config: dict[str, Any] | None = None) -> Flask:

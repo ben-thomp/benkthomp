@@ -103,7 +103,9 @@ def build_schedule(certs: dict[str, Any], types: dict[str, Any]) -> dict[str, An
 
         sections: dict[str, Any] = cert.get("sections", {})
         sections_list = list(sections.values())
-        primary_type = sections_list[0].get("type", cert_key) if sections_list else cert_key
+        primary_type = (
+            sections_list[0].get("type", cert_key) if sections_list else cert_key
+        )
         cert_meta[cert_key] = {"primary_type": primary_type}
 
         if start_date is None or cert_start < start_date:
@@ -131,19 +133,27 @@ def build_schedule(certs: dict[str, Any], types: dict[str, Any]) -> dict[str, An
 
             for d in range(duration):
                 day = _add_days(day_start, d)
-                all_schedule.setdefault(day.isoformat(), []).append({
-                    "type": event_type,
-                    "label": label,
-                    "complete": bool(section_data.get("complete", False)),
-                })
+                all_schedule.setdefault(day.isoformat(), []).append(
+                    {
+                        "type": event_type,
+                        "label": label,
+                        "complete": bool(section_data.get("complete", False)),
+                    }
+                )
 
             last_day = _add_days(day_start, duration - 1)
             if end_date is None or last_day > end_date:
                 end_date = last_day
 
             if event_type != phase_type:
-                if phase_type is not None and phase_start is not None and phase_end is not None:
-                    all_phases.append(_make_phase(types, phase_type, phase_start, phase_end))
+                if (
+                    phase_type is not None
+                    and phase_start is not None
+                    and phase_end is not None
+                ):
+                    all_phases.append(
+                        _make_phase(types, phase_type, phase_start, phase_end)
+                    )
                 phase_type = event_type
                 phase_start = day_start
             phase_end = last_day
@@ -270,7 +280,9 @@ def get_page_data() -> dict[str, Any]:
     for cert_key, cert in certs.items():
         sections = cert.get("sections", {})
         sections_list = list(sections.values())
-        primary_type = sections_list[0].get("type", cert_key) if sections_list else cert_key
+        primary_type = (
+            sections_list[0].get("type", cert_key) if sections_list else cert_key
+        )
         primary = [s for s in sections_list if s.get("type") == primary_type]
         pct = (
             round(sum(1 for s in primary if s.get("complete")) / len(primary) * 100)

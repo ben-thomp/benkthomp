@@ -5,6 +5,8 @@ from pathlib import Path
 
 from flask import Flask, render_template
 
+from benkthomp.projects import GITHUB_URL, PROJECTS, project_url
+
 
 def create_app(config=None):
     """Application factory for creating Flask app instances."""
@@ -36,23 +38,13 @@ def register_routes(app):
 
     @app.route("/")
     def index():
-        """Render the home page."""
-        return render_template("index.html")
-
-    @app.route("/about")
-    def about():
-        """Render the about page."""
-        return render_template("about.html")
-
-    @app.route("/projects")
-    def projects():
-        """Render the projects page."""
-        return render_template("projects.html")
-
-    @app.route("/contact")
-    def contact():
-        """Render the contact page."""
-        return render_template("contact.html")
+        """Render the project list."""
+        return render_template(
+            "index.html",
+            projects=PROJECTS,
+            project_url=project_url,
+            github_url=GITHUB_URL,
+        )
 
 
 if __name__ == "__main__":

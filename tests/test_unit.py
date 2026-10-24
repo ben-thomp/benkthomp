@@ -21,3 +21,20 @@ class TestAppFactory:
         """Test that a default secret key is set."""
         app = create_app()
         assert app.config["SECRET_KEY"] is not None
+
+
+class TestProjects:
+    """Unit tests for project data."""
+
+    def test_projects_have_required_fields(self):
+        """Test that every project has the fields the template uses."""
+        from benkthomp.projects import PROJECTS
+
+        for project in PROJECTS:
+            assert {"name", "description", "language"} <= project.keys()
+
+    def test_project_url(self):
+        """Test that project URLs point at the GitHub repo."""
+        from benkthomp.projects import project_url
+
+        assert project_url({"name": "x"}) == "https://github.com/ben-thomp/x"

@@ -9,13 +9,11 @@ benkthomp/
 ├── src/
 │   └── benkthomp/
 │       ├── __init__.py
-│       └── app.py
+│       ├── app.py
+│       └── projects.py
 ├── templates/
 │   ├── base.html
-│   ├── index.html
-│   ├── about.html
-│   ├── projects.html
-│   └── contact.html
+│   └── index.html
 ├── static/
 │   └── css/
 │       └── style.css

@@ -19,3 +19,7 @@ services:
         value: /opt/render/project/src/data
       - key: ROADMAP_ADMIN_KEY
         sync: false
+      - key: ENCLOSURE_DB_PATH
+        value: /opt/render/project/src/instance/enclosures.db
+      - key: ENCLOSURE_INGEST_TOKEN
+        sync: false

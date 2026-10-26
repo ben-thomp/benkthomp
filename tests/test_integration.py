@@ -45,7 +45,6 @@ class TestRoadmapRoute:
     def test_home_page_has_roadmap_card(self, client):
         response = client.get("/")
         assert b"Certification Roadmap" in response.data
-        assert b"Gregory" not in response.data
 
 
 class TestRoadmapAPI:

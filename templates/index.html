@@ -5,6 +5,18 @@
 {% block content %}
 <section class="page-section">
   <div class="project-list">
+    <a href="{{ url_for('gregory') }}" class="project-card">
+      <div class="project-card-title">Gregory</div>
+      <div class="project-card-desc">
+        Live temperature and humidity for Gregory the boa constrictor's enclosure.
+      </div>
+    </a>
+    <a href="{{ url_for('roxy') }}" class="project-card">
+      <div class="project-card-title">Roxy</div>
+      <div class="project-card-desc">
+        Live temperature and humidity for Roxy the bearded dragon's enclosure.
+      </div>
+    </a>
     <a href="{{ url_for('roadmap') }}" class="project-card">
       <div class="project-card-title">Certification Roadmap</div>
       <div class="project-card-desc">

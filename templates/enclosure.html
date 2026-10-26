@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}benkthomp - {{ info.name }}{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<section class="page-section">
+  <h1>{{ info.name }}</h1>
+  <p class="enclosure-sub">{{ info.species }} &middot; {{ info.desc }}</p>
+
+  <div class="enclosure-stats">
+    <div class="stat-card">
+      <span class="stat-label">Temperature</span>
+      <span class="stat-value" id="current-temp">--</span>
+      <span class="stat-note" id="current-temp-c"></span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Humidity</span>
+      <span class="stat-value" id="current-humidity">--</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Last updated</span>
+      <span class="stat-value" id="last-updated">--</span>
+      <span class="stat-note" id="last-updated-note"></span>
+    </div>
+  </div>
+
+  <div class="chart-controls">
+    <button class="chart-btn active" data-hours="24">24 hours</button>
+    <button class="chart-btn" data-hours="168">7 days</button>
+    <button class="chart-btn" data-hours="720">30 days</button>
+  </div>
+
+  <div class="chart-container"><canvas id="tempChart"></canvas></div>
+  <div class="chart-container"><canvas id="humidityChart"></canvas></div>
+  <p class="chart-empty" id="chart-empty" hidden>No readings in this range yet.</p>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const ENCLOSURE = {
+    subject: {{ subject | tojson }},
+    latest: {{ latest | tojson }},
+  };
+</script>
+<script src="{{ url_for('static', filename='js/enclosure.js') }}"></script>
+{% endblock %}

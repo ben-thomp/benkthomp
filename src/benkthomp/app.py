@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 from typing import Any
 
+import click
 from dotenv import load_dotenv
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 
@@ -56,6 +57,55 @@ def register_routes(app: Flask) -> None:
     @app.route("/projects")
     def projects():
         return redirect(url_for("index"), code=301)
+
+    def _enclosure_page(subject: str):
+        from benkthomp import enclosures
+
+        return render_template(
+            "enclosure.html",
+            subject=subject,
+            info=enclosures.SUBJECTS[subject],
+            latest=enclosures.get_latest(subject),
+        )
+
+    for _subject in ("gregory", "roxy"):
+        app.add_url_rule(
+            f"/{_subject}",
+            endpoint=_subject,
+            view_func=lambda s=_subject: _enclosure_page(s),
+        )
+
+    @app.route("/api/enclosures/<subject>/readings")
+    def enclosure_readings(subject):
+        from benkthomp import enclosures
+
+        if subject not in enclosures.SUBJECTS:
+            return jsonify({"error": "unknown subject"}), 404
+        hours = min(max(request.args.get("hours", 24, type=int), 1), 24 * 90)
+        return jsonify(enclosures.get_readings(subject, hours))
+
+    @app.route("/api/readings", methods=["POST"])
+    def ingest_readings():
+        from benkthomp import enclosures
+
+        auth = request.headers.get("Authorization", "")
+        token = auth[7:] if auth.startswith("Bearer ") else ""
+        if not enclosures.check_ingest_token(token):
+            return jsonify({"error": "unauthorized"}), 401
+        payload = request.get_json(silent=True)
+        if payload is None:
+            return jsonify({"error": "bad request"}), 400
+        result = enclosures.ingest(payload)
+        if "error" in result:
+            return jsonify(result), 400
+        return jsonify(result), 201
+
+    @app.cli.command("seed-enclosures")
+    def seed_enclosures():
+        """Fill the enclosure DB with synthetic readings (local previews only)."""
+        from benkthomp import enclosures
+
+        click.echo(f"Seeded {enclosures.seed_demo()} demo readings.")
 
     @app.route("/roadmap")
     def roadmap():

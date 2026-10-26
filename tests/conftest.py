@@ -7,6 +7,13 @@ import pytest
 from benkthomp.app import create_app
 
 
+@pytest.fixture(autouse=True)
+def enclosure_db(tmp_path, monkeypatch):
+    """Point enclosure storage at a throwaway DB with a known ingest token."""
+    monkeypatch.setenv("ENCLOSURE_DB_PATH", str(tmp_path / "enclosures.db"))
+    monkeypatch.setenv("ENCLOSURE_INGEST_TOKEN", "test-token")
+
+
 @pytest.fixture
 def app():
     """Create and configure a test Flask app instance."""

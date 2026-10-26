@@ -7,12 +7,11 @@ class TestEndToEndNavigation:
         assert response.status_code == 200
         assert b"benkthomp" in response.data
 
-        response = client.get("/projects")
+        response = client.get("/roadmap")
         assert response.status_code == 200
-        assert b"Projects" in response.data
 
     def test_all_pages_share_base_layout(self, client):
-        pages = ["/", "/projects"]
+        pages = ["/", "/roadmap"]
 
         for page in pages:
             response = client.get(page)

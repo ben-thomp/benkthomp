@@ -12,18 +12,11 @@ class TestHomeRoute:
         assert b"benkthomp" in response.data
 
 
-class TestProjectsRoute:
-    def test_projects_route_exists(self, client):
+class TestProjectsRedirect:
+    def test_projects_redirects_home(self, client):
         response = client.get("/projects")
-        assert response.status_code == 200
-
-    def test_projects_route_returns_html(self, client):
-        response = client.get("/projects")
-        assert response.content_type.startswith("text/html")
-
-    def test_projects_page_contains_heading(self, client):
-        response = client.get("/projects")
-        assert b"Projects" in response.data
+        assert response.status_code == 301
+        assert response.headers["Location"].endswith("/")
 
 
 class TestStaticFiles:
@@ -49,8 +42,8 @@ class TestRoadmapRoute:
         response = roadmap_client.get("/roadmap")
         assert b"cert-progress-fill" in response.data
 
-    def test_projects_page_has_roadmap_card(self, client):
-        response = client.get("/projects")
+    def test_home_page_has_roadmap_card(self, client):
+        response = client.get("/")
         assert b"Certification Roadmap" in response.data
         assert b"Gregory" not in response.data
 

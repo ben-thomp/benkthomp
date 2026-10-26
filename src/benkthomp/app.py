@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from dotenv import load_dotenv
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, redirect, render_template, request, url_for
 
 load_dotenv()
 
@@ -55,7 +55,7 @@ def register_routes(app: Flask) -> None:
 
     @app.route("/projects")
     def projects():
-        return render_template("projects.html")
+        return redirect(url_for("index"), code=301)
 
     @app.route("/roadmap")
     def roadmap():

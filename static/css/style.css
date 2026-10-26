@@ -84,25 +84,6 @@ a:hover {
   width: 100%;
 }
 
-/* Hero section */
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 40vh;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 0.75rem;
-}
-
-.hero-subtitle {
-  font-size: 1.25rem;
-  color: #888888;
-}
 
 /* Page sections */
 .page-section {
@@ -143,7 +124,8 @@ a:hover {
   color: #aaaaaa;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  margin-bottom: 0.75rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 /* Project cards */
@@ -184,10 +166,6 @@ a:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-
   .nav-links {
     gap: 1rem;
   }

@@ -19,6 +19,16 @@ class TestProjectsRedirect:
         assert response.headers["Location"].endswith("/")
 
 
+class TestHomeProjects:
+    def test_home_lists_github_repos(self, client):
+        data = client.get("/").data
+        assert b"https://github.com/ben-thomp/python-notes" in data
+
+    def test_home_lists_site_pages_first(self, client):
+        data = client.get("/").data
+        assert data.index(b"Gregory") < data.index(b"python-notes")
+
+
 class TestStaticFiles:
     def test_static_css_accessible(self, client):
         response = client.get("/static/css/style.css")

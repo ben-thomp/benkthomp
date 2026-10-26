@@ -8,6 +8,8 @@ import click
 from dotenv import load_dotenv
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 
+from benkthomp.projects import PROJECTS, project_url
+
 load_dotenv()
 
 
@@ -52,7 +54,7 @@ def register_routes(app: Flask) -> None:
 
     @app.route("/")
     def index():
-        return render_template("index.html")
+        return render_template("index.html", projects=PROJECTS, project_url=project_url)
 
     @app.route("/projects")
     def projects():

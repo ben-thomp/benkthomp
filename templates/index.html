@@ -5,25 +5,14 @@
 {% block content %}
 <section class="page-section">
   <div class="project-list">
-    <a href="{{ url_for('gregory') }}" class="project-card">
-      <div class="project-card-title">Gregory</div>
-      <div class="project-card-desc">
-        Live temperature and humidity for Gregory the boa constrictor's enclosure.
-      </div>
+    {% for project in projects %}
+    <a href="{{ project_url(project) }}" class="project-card"
+       {% if project.repo %}target="_blank" rel="noopener"{% endif %}>
+      <div class="project-card-title">{{ project.name }}</div>
+      <div class="project-card-desc">{{ project.description }}</div>
+      {% if project.language %}<span class="project-card-tag">{{ project.language }}</span>{% endif %}
     </a>
-    <a href="{{ url_for('roxy') }}" class="project-card">
-      <div class="project-card-title">Roxy</div>
-      <div class="project-card-desc">
-        Live temperature and humidity for Roxy the bearded dragon's enclosure.
-      </div>
-    </a>
-    <a href="{{ url_for('roadmap') }}" class="project-card">
-      <div class="project-card-title">Certification Roadmap</div>
-      <div class="project-card-desc">
-        Interactive study calendar tracking Gen AI and CPCU 555 certification progress —
-        Gantt timeline, month-by-month calendar, and per-certification progress bars.
-      </div>
-    </a>
+    {% endfor %}
   </div>
 </section>
 {% endblock %}

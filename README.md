@@ -21,9 +21,9 @@ benkthomp/
 │       └── style.css
 ├── tests/
 │   ├── conftest.py
-│   ├── test_unit.py
-│   ├── test_integration.py
-│   └── test_system.py
+│   ├── unit/           # test_unit_<module>.py
+│   ├── integration/    # test_integration_<module>.py
+│   └── system/         # test_system_<module>.py
 ├── .gitignore
 ├── CHANGELOG.md
 ├── lint.py
@@ -63,9 +63,9 @@ The application will be available at [http://localhost:5000](http://localhost:50
 
 ```bash
 pytest                              # All tests
-pytest tests/test_unit.py           # Unit tests only
-pytest tests/test_integration.py    # Integration tests only
-pytest tests/test_system.py         # System tests only
+pytest tests/unit                   # Unit tests only
+pytest tests/integration            # Integration tests only
+pytest tests/system                 # System tests only
 ```
 
 ## Code Quality

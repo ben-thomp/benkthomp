@@ -1,0 +1,20 @@
+{# Status, next-up and milestone lists for one parsed ROADMAP.md. #}
+{% macro roadmap_items(roadmap) %}
+  {% if roadmap.status %}<p class="pr-status">{{ roadmap.status }}</p>{% endif %}
+  {% if roadmap.next_up %}
+  <p class="pr-label">Next up</p>
+  <ul class="pr-points">
+    {% for item in roadmap.next_up %}
+    <li class="{{ 'pr-done' if item.done }}">{{ item.text }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if roadmap.milestones %}
+  <p class="pr-label">Milestones</p>
+  <ul class="pr-points">
+    {% for item in roadmap.milestones %}
+    <li class="{{ 'pr-done' if item.done }}">{{ '&#9745;'|safe if item.done else '&#9744;'|safe }} {{ item.text }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+{% endmacro %}

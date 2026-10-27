@@ -4,8 +4,22 @@ services:
     runtime: python
     buildCommand: pip install .
     startCommand: gunicorn "benkthomp.app:create_app()"
+    disk:
+      name: benkthomp-data
+      mountPath: /opt/render/project/src/instance
+      sizeGB: 1
     envVars:
       - key: PYTHON_VERSION
         value: "3.12"
       - key: SECRET_KEY
         generateValue: true
+      - key: ROADMAP_INSTANCE_DIR
+        value: /opt/render/project/src/instance
+      - key: ROADMAP_DATA_DIR
+        value: /opt/render/project/src/data
+      - key: ROADMAP_ADMIN_KEY
+        sync: false
+      - key: ENCLOSURE_DB_PATH
+        value: /opt/render/project/src/instance/enclosures.db
+      - key: ENCLOSURE_INGEST_TOKEN
+        sync: false

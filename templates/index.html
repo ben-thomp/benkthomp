@@ -1,10 +1,16 @@
 {% extends "base.html" %}
 
-{% block title %}benkthomp - Home{% endblock %}
+{% block title %}benkthomp{% endblock %}
 
 {% block content %}
-<section class="hero">
-  <h1>benkthomp</h1>
-  <p class="hero-subtitle">Coming soon</p>
+<section class="page-section">
+  <ul class="project-index">
+    {% for project in projects %}
+    <li>
+      <a href="{{ project_url(project) }}">{{ project.name }}</a>
+      <span class="project-index-desc">{{ project.description }}</span>
+    </li>
+    {% endfor %}
+  </ul>
 </section>
 {% endblock %}

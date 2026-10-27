@@ -1,0 +1,36 @@
+{# Shared pieces of the enclosure plan drawings (6 columns A-F, 90 units each). #}
+
+{# Cool / Transition / Hot band plus the column letters. #}
+{% macro cols(band_y, letter_y) %}
+<g class="c-blue"><rect x="70" y="{{ band_y }}" width="180" height="22" rx="4"/><text class="th m" x="160" y="{{ band_y + 11 }}">Cool side</text></g>
+<g class="c-gray"><rect x="250" y="{{ band_y }}" width="180" height="22" rx="4"/><text class="th m" x="340" y="{{ band_y + 11 }}">Transition</text></g>
+<g class="c-red"><rect x="430" y="{{ band_y }}" width="180" height="22" rx="4"/><text class="th m" x="520" y="{{ band_y + 11 }}">Hot side</text></g>
+{% for letter in "ABCDEF" %}
+<text class="th m" x="{{ 115 + 90 * loop.index0 }}" y="{{ letter_y }}">{{ letter }}</text>
+{% endfor %}
+{% endmacro %}
+
+{# Top-down view: 6 x 2 cells of 1 ft, with depth labels. #}
+{% macro grid_top() %}
+<path class="box" d="M70 80H610V260H70ZM160 80V260M250 80V260M340 80V260M430 80V260M520 80V260M70 170H610"/>
+<text class="ts e" x="62" y="125">1 ft</text>
+<text class="ts e" x="62" y="215">2 ft</text>
+<text class="ts" x="618" y="125">back</text>
+<text class="ts" x="618" y="215">front</text>
+{% endmacro %}
+
+{# Front view: 24 in tall at 7.5 units per inch, column dividers, height scale. #}
+{% macro grid_front() %}
+<rect class="box" x="70" y="70" width="540" height="180"/>
+{% for x in (160, 250, 340, 430, 520) %}
+<line class="leader" x1="{{ x }}" y1="70" x2="{{ x }}" y2="250"/>
+{% endfor %}
+{% for label, y in (("24 in", 70), ("18 in", 115), ("12 in", 160), ("6 in", 205), ("0", 250)) %}
+<text class="ts e" x="62" y="{{ y }}">{{ label }}</text>
+{% endfor %}
+{% endmacro %}
+
+{# Sand layer shared by both front views. #}
+{% macro sand() %}
+<rect class="c-amber" x="71" y="212" width="538" height="38"/>
+{% endmacro %}

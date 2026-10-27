@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 /* Base styles */
 * {
   margin: 0;
@@ -6,17 +8,20 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, sans-serif;
-  background: #0d1117;
-  color: #f0f6fc;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0f0f0f;
+  color: #f1f1f1;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
 a {
-  color: #58a6ff;
+  color: #3ea6ff;
   text-decoration: none;
 }
 
@@ -26,9 +31,11 @@ a:hover {
 
 /* Navbar */
 .navbar {
-  background: #161b22;
-  border-bottom: 1px solid #30363d;
+  background: #0f0f0f;
   padding: 0.75rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .nav-container {
@@ -41,14 +48,15 @@ a:hover {
 }
 
 .nav-brand {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: #f0f6fc;
+  letter-spacing: -0.02em;
+  color: #f1f1f1;
 }
 
 .nav-brand:hover {
   text-decoration: none;
-  color: #58a6ff;
+  color: #3ea6ff;
 }
 
 .nav-links {
@@ -58,12 +66,13 @@ a:hover {
 }
 
 .nav-links a {
-  color: #8b949e;
-  font-size: 0.95rem;
+  color: #f1f1f1;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .nav-links a:hover {
-  color: #f0f6fc;
+  color: #3ea6ff;
   text-decoration: none;
 }
 
@@ -72,51 +81,30 @@ a:hover {
   flex: 1;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 0 1.5rem 2rem;
   width: 100%;
 }
 
-/* Hero section */
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 60vh;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 0.75rem;
-}
-
-.hero-subtitle {
-  font-size: 1.25rem;
-  color: #8b949e;
-}
 
 /* Page sections */
 .page-section {
-  padding: 2rem 0;
+  padding: 0 0 2rem;
 }
 
 .page-section h1 {
   font-size: 2rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #30363d;
-  padding-bottom: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
 }
 
 .page-section p {
-  color: #8b949e;
+  color: #888888;
   line-height: 1.7;
 }
 
 /* Footer */
 .footer {
-  background: #161b22;
-  border-top: 1px solid #30363d;
+  background: #0f0f0f;
   padding: 1.5rem 0;
   margin-top: auto;
 }
@@ -126,17 +114,379 @@ a:hover {
   margin: 0 auto;
   padding: 0 1.5rem;
   text-align: center;
-  color: #8b949e;
+  color: #555555;
   font-size: 0.875rem;
+}
+
+/* Section label (small uppercase heading) */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #aaaaaa;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Project index */
+.project-index {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.project-index li {
+  display: grid;
+  grid-template-columns: minmax(10rem, 14rem) 1fr;
+  gap: 1.5rem;
+  padding: 0.6rem 0;
+}
+
+.project-index a {
+  color: #f1f1f1;
+  font-weight: 500;
+}
+
+.project-index a:hover {
+  color: #3ea6ff;
+  text-decoration: none;
+}
+
+.project-index-desc {
+  color: #888888;
+  line-height: 1.5;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2rem;
+  .project-index li {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
   }
 
   .nav-links {
     gap: 1rem;
   }
 }
+
+/* Enclosure pages */
+.enclosure-sub {
+  color: #888888;
+  margin-top: 0.25rem;
+}
+
+.enclosure-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.stat-card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #aaaaaa;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.35rem;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.stat-note {
+  display: block;
+  font-size: 0.8rem;
+  color: #888888;
+  margin-top: 0.25rem;
+}
+
+.stat-stale {
+  color: #f0b429;
+}
+
+.chart-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.chart-btn {
+  background: #1a1a1a;
+  color: #aaaaaa;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.chart-btn:hover {
+  border-color: #888888;
+}
+
+.chart-btn.active {
+  color: #f1f1f1;
+  border-color: #3ea6ff;
+}
+
+.chart-container {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.chart-empty {
+  color: #888888;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* Roadmap (per-project status) */
+.pr-list {
+  list-style: none;
+  margin-top: 1.5rem;
+}
+
+.pr-item {
+  padding: 1rem 0;
+  border-top: 1px solid #2a2a2a;
+}
+
+.pr-name {
+  color: #f1f1f1;
+  font-weight: 500;
+}
+
+.pr-name:hover {
+  color: #3ea6ff;
+  text-decoration: none;
+}
+
+.pr-status {
+  color: #888888;
+  margin-top: 0.25rem;
+}
+
+.pr-label {
+  font-size: 0.75rem;
+  color: #aaaaaa;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 0.75rem;
+}
+
+.pr-points {
+  list-style: none;
+  margin-top: 0.25rem;
+}
+
+.pr-points li {
+  color: #f1f1f1;
+  line-height: 1.6;
+}
+
+.pr-points li.pr-done {
+  color: #888888;
+  text-decoration: line-through;
+}
+
+/* Project pages */
+.project-links {
+  margin-top: 0.75rem;
+}
+
+.project-heading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #aaaaaa;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #2a2a2a;
+}
+
+.file-tree {
+  list-style: none;
+  margin-top: 0.5rem;
+  line-height: 1.7;
+}
+
+.file-tree .file-tree {
+  margin-top: 0;
+  padding-left: 1.25rem;
+  border-left: 1px solid #2a2a2a;
+  margin-left: 0.4rem;
+}
+
+.file-tree a {
+  color: #f1f1f1;
+}
+
+.file-tree a:hover {
+  color: #3ea6ff;
+  text-decoration: none;
+}
+
+.file-tree summary {
+  cursor: pointer;
+  color: #aaaaaa;
+}
+
+.file-more {
+  color: #888888;
+}
+
+.markdown {
+  margin-top: 0.75rem;
+  max-width: 75ch;
+  line-height: 1.6;
+}
+
+.markdown h1, .markdown h2, .markdown h3 {
+  margin: 1.5rem 0 0.5rem;
+}
+
+.markdown h1 { font-size: 1.4rem; }
+.markdown h2 { font-size: 1.2rem; }
+.markdown h3 { font-size: 1.05rem; }
+
+.markdown p, .markdown ul, .markdown ol {
+  margin: 0.75rem 0;
+}
+
+.markdown ul, .markdown ol {
+  padding-left: 1.5rem;
+}
+
+.markdown code {
+  background: #1a1a1a;
+  border-radius: 4px;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.9em;
+}
+
+.markdown pre {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+}
+
+.markdown pre code {
+  background: none;
+  padding: 0;
+}
+
+.markdown table {
+  border-collapse: collapse;
+}
+
+.markdown th, .markdown td {
+  border: 1px solid #2a2a2a;
+  padding: 0.35rem 0.75rem;
+}
+
+.markdown img {
+  max-width: 100%;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 0.5rem 0;
+  color: #888888;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tab:hover {
+  color: #3ea6ff;
+}
+
+.tab.active {
+  color: #f1f1f1;
+  border-bottom-color: #3ea6ff;
+}
+
+/* Enclosure plan drawings (inline SVG) */
+.plans-summary {
+  margin-top: 1.25rem;
+}
+
+.plan {
+  margin-top: 1.5rem;
+}
+
+.plan figcaption {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #aaaaaa;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.plan-scroll {
+  overflow-x: auto;
+  background: #262624;
+  border-radius: 12px;
+}
+
+.plan svg {
+  display: block;
+  width: 100%;
+  min-width: 600px;
+  height: auto;
+}
+
+.plan text { font-size: 12px; dominant-baseline: central; fill: #B4B2A9; }
+.plan .th { font-size: 14px; font-weight: 500; fill: #F1EFE8; }
+.plan .m { text-anchor: middle; }
+.plan .e { text-anchor: end; }
+.plan .lg { dominant-baseline: auto; }
+.plan rect, .plan circle { stroke-width: 0.5; }
+.plan .med { stroke-width: 1; }
+.plan .thick { stroke-width: 1.5; }
+.plan .dashed { stroke-dasharray: 4 3; }
+.plan .dotted { stroke-dasharray: 3 2; }
+.plan .box { fill: #30302E; stroke: #5F5E5A; stroke-width: 0.5; }
+.plan .leader { stroke: #5F5E5A; stroke-width: 0.5; stroke-dasharray: 3 3; }
+.plan .arr { stroke: #B4B2A9; stroke-width: 1.5; fill: none; }
+.plan .stem { stroke: #F09595; stroke-width: 1.5; }
+
+.plan .c-blue, .plan .c-blue rect, .plan .c-blue circle { fill: #0C447C; stroke: #85B7EB; }
+.plan .c-red, .plan .c-red rect, .plan .c-red circle { fill: #791F1F; stroke: #F09595; }
+.plan .c-green, .plan .c-green rect, .plan .c-green circle { fill: #27500A; stroke: #97C459; }
+.plan .c-gray, .plan .c-gray rect, .plan .c-gray circle { fill: #444441; stroke: #B4B2A9; }
+.plan .c-amber, .plan .c-amber rect, .plan .c-amber circle { fill: #633806; stroke: #EF9F27; }
+.plan .c-blue text { fill: #B5D4F4; stroke: none; }
+.plan .c-red text { fill: #F7C1C1; stroke: none; }
+.plan .c-green text { fill: #C0DD97; stroke: none; }
+.plan .c-gray text { fill: #D3D1C7; stroke: none; }
+.plan .c-amber text { fill: #FAC775; stroke: none; }

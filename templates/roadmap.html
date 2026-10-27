@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from "_roadmap_items.html" import roadmap_items %}
+
+{% block title %}benkthomp - Roadmap{% endblock %}
+
+{% block content %}
+<section class="page-section">
+  <h1>Roadmap</h1>
+  <p>Where each project stands, read from its ROADMAP.md.</p>
+
+  <ul class="pr-list">
+    {% for entry in entries %}
+    <li class="pr-item">
+      <a class="pr-name" href="{{ project_url(entry.project) }}">{{ entry.project.name }}</a>
+      {% if entry.roadmap %}
+        {{ roadmap_items(entry.roadmap) }}
+      {% else %}
+        <p class="pr-status">No roadmap published yet.</p>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

@@ -85,3 +85,34 @@ document.querySelectorAll(".chart-btn").forEach((btn) => {
 
 renderLatest(ENCLOSURE.latest);
 load(24);
+
+// Tabs (only rendered for subjects with plans). The URL hash keeps a tab linkable.
+const tabs = [...document.querySelectorAll(".tab")];
+
+function showTab(name) {
+  tabs.forEach((tab) => {
+    const on = tab.dataset.panel === name;
+    tab.classList.toggle("active", on);
+    tab.setAttribute("aria-selected", on);
+    tab.tabIndex = on ? 0 : -1;
+    document.getElementById("panel-" + tab.dataset.panel).hidden = !on;
+  });
+}
+
+if (tabs.length) {
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => {
+      showTab(tab.dataset.panel);
+      history.replaceState(null, "", "#" + tab.dataset.panel);
+    });
+    tab.addEventListener("keydown", (e) => {
+      const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+      if (!step) return;
+      const next = tabs[(i + step + tabs.length) % tabs.length];
+      next.focus();
+      next.click();
+    });
+  });
+  const wanted = location.hash.slice(1);
+  if (tabs.some((t) => t.dataset.panel === wanted)) showTab(wanted);
+}

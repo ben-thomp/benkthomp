@@ -17,7 +17,7 @@ SCHEMA_VERSION = 1
 
 # Subject id -> display info. Sensors map to subjects, so swapping a sensor
 # keeps the history.
-SUBJECTS: dict[str, dict[str, str]] = {
+SUBJECTS: dict[str, dict[str, Any]] = {
     "gregory": {
         "name": "Gregory",
         "species": "Boa constrictor",
@@ -27,6 +27,19 @@ SUBJECTS: dict[str, dict[str, str]] = {
         "name": "Roxy",
         "species": "Bearded dragon",
         "desc": "Temperature and humidity in Roxy's enclosure.",
+        # Plan drawings live in templates/plans/<subject>/<file>.html.
+        "plans": {
+            "label": "6x2x2 Enclosure",
+            "summary": "Planned 6 ft x 2 ft x 24 in tall enclosure: layout, then heat "
+            "and light, from above and from the front.",
+            "figures": [
+                {"file": "color-key", "title": ""},
+                {"file": "decor-top", "title": "Layout, top-down"},
+                {"file": "heat-light-top", "title": "Heat and light, top-down"},
+                {"file": "decor-front", "title": "Layout, front view"},
+                {"file": "heat-light-front", "title": "Heat and light, front view"},
+            ],
+        },
     },
 }
 

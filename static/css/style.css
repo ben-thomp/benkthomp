@@ -404,3 +404,89 @@ a:hover {
 .markdown img {
   max-width: 100%;
 }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 0.5rem 0;
+  color: #888888;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tab:hover {
+  color: #3ea6ff;
+}
+
+.tab.active {
+  color: #f1f1f1;
+  border-bottom-color: #3ea6ff;
+}
+
+/* Enclosure plan drawings (inline SVG) */
+.plans-summary {
+  margin-top: 1.25rem;
+}
+
+.plan {
+  margin-top: 1.5rem;
+}
+
+.plan figcaption {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #aaaaaa;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.plan-scroll {
+  overflow-x: auto;
+  background: #262624;
+  border-radius: 12px;
+}
+
+.plan svg {
+  display: block;
+  width: 100%;
+  min-width: 600px;
+  height: auto;
+}
+
+.plan text { font-size: 12px; dominant-baseline: central; fill: #B4B2A9; }
+.plan .th { font-size: 14px; font-weight: 500; fill: #F1EFE8; }
+.plan .m { text-anchor: middle; }
+.plan .e { text-anchor: end; }
+.plan .lg { dominant-baseline: auto; }
+.plan rect, .plan circle { stroke-width: 0.5; }
+.plan .med { stroke-width: 1; }
+.plan .thick { stroke-width: 1.5; }
+.plan .dashed { stroke-dasharray: 4 3; }
+.plan .dotted { stroke-dasharray: 3 2; }
+.plan .box { fill: #30302E; stroke: #5F5E5A; stroke-width: 0.5; }
+.plan .leader { stroke: #5F5E5A; stroke-width: 0.5; stroke-dasharray: 3 3; }
+.plan .arr { stroke: #B4B2A9; stroke-width: 1.5; fill: none; }
+.plan .stem { stroke: #F09595; stroke-width: 1.5; }
+
+.plan .c-blue, .plan .c-blue rect, .plan .c-blue circle { fill: #0C447C; stroke: #85B7EB; }
+.plan .c-red, .plan .c-red rect, .plan .c-red circle { fill: #791F1F; stroke: #F09595; }
+.plan .c-green, .plan .c-green rect, .plan .c-green circle { fill: #27500A; stroke: #97C459; }
+.plan .c-gray, .plan .c-gray rect, .plan .c-gray circle { fill: #444441; stroke: #B4B2A9; }
+.plan .c-amber, .plan .c-amber rect, .plan .c-amber circle { fill: #633806; stroke: #EF9F27; }
+.plan .c-blue text { fill: #B5D4F4; stroke: none; }
+.plan .c-red text { fill: #F7C1C1; stroke: none; }
+.plan .c-green text { fill: #C0DD97; stroke: none; }
+.plan .c-gray text { fill: #D3D1C7; stroke: none; }
+.plan .c-amber text { fill: #FAC775; stroke: none; }

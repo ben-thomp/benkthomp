@@ -1,0 +1,50 @@
+{% from "plans/_parts.html" import cols, grid_top %}
+{% set table = [
+  ("Air °F", ["75-80", "77-82", "80-85", "85-90", "90-95", "95-100"]),
+  ("UVI est.", ["1-1.5", "0.5-1", "0-1", "1-2", "2-3", "4-6"]),
+  ("Light", ["Medium", "Medium", "Medium", "Medium", "Bright", "Brightest"]),
+  ("Source", ["T8", "LED", "LED", "LED", "LED+T5", "Halogen+T5"]),
+] %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 392" role="img"><title>Roxy enclosure: heat and light layer, top-down</title><desc>T8 and T5 set toward the back along the left and right walls. Four 12 inch LED strips centered in columns B to E. Halogen over the basking spot in F1. Optional CHEs in A1 and F2. A table under the grid gives estimated air temperature, UVI, light level and light source per column.</desc>
+{{ cols(30, 70) }}
+{{ grid_top() }}
+
+<rect class="c-gray dotted" x="530" y="90" width="70" height="70" rx="3"/>
+<text class="ts m" x="565" y="141">Basking</text>
+<text class="ts m" x="565" y="152">spot</text>
+<circle class="c-red med" cx="565" cy="125" r="7"/>
+
+<rect class="c-red med" x="596" y="86" width="10" height="135" rx="3"/>
+<text class="ts e" x="592" y="104">T5</text>
+<rect class="c-blue med" x="76" y="86" width="10" height="135" rx="3"/>
+<text class="ts" x="92" y="153">T8</text>
+
+{% for x in (201, 291, 381, 471) %}
+<rect class="c-blue dashed" x="{{ x }}" y="125" width="8" height="90" rx="3"/>
+{% endfor %}
+<circle class="c-red dotted" cx="115" cy="125" r="8"/>
+<circle class="c-red dotted" cx="565" cy="215" r="8"/>
+<rect class="c-gray" x="226" y="83" width="14" height="8" rx="2"/>
+<rect class="c-gray" x="490" y="83" width="14" height="8" rx="2"/>
+
+{% for label, values in table %}
+{% set y = 286 + 20 * loop.index0 %}
+<text class="ts e" x="62" y="{{ y }}">{{ label }}</text>
+{% for value in values %}
+<text class="ts m" x="{{ 115 + 90 * loop.index0 }}" y="{{ y }}">{{ value }}</text>
+{% endfor %}
+{% endfor %}
+
+<rect class="c-red med" x="40" y="364" width="10" height="16" rx="3"/>
+<text class="ts lg" x="58" y="376">T5</text>
+<circle class="c-red med" cx="104" cy="372" r="6"/>
+<text class="ts lg" x="116" y="376">Halogen</text>
+<circle class="c-red dotted" cx="190" cy="372" r="6"/>
+<text class="ts lg" x="202" y="376">CHE, if needed</text>
+<rect class="c-blue med" x="316" y="364" width="10" height="16" rx="3"/>
+<text class="ts lg" x="334" y="376">T8</text>
+<rect class="c-blue dotted" x="380" y="364" width="8" height="16" rx="3"/>
+<text class="ts lg" x="396" y="376">LED strips, 12 in</text>
+<rect class="c-gray" x="540" y="368" width="14" height="8" rx="2"/>
+<text class="ts lg" x="562" y="376">Govee</text>
+</svg>

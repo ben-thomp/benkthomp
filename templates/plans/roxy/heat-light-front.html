@@ -1,0 +1,50 @@
+{% from "plans/_parts.html" import cols, grid_front, sand %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 330" role="img"><title>Roxy enclosure: heat and light layer, front view</title><desc>Front elevation with a 5 inch sand layer. T8 and T5 are mounted at the same height. The halogen hangs about 9.5 inches above the basking spot at 11 inches, and the CHEs sit at the same height as the halogen, so the one in F2 is hidden behind the halogen in F1.</desc>
+<defs><marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+{{ cols(20, 58) }}
+{{ grid_front() }}
+{{ sand() }}
+<text class="ts m" x="340" y="241">Sand 5 in</text>
+
+<rect class="c-gray" x="74" y="205" width="82" height="45" rx="4"/>
+<rect class="c-gray" x="524" y="205" width="82" height="45" rx="3"/>
+<rect class="c-green" x="530" y="168" width="70" height="37" rx="3"/>
+<text class="ts m" x="565" y="262">Basking spot, 11 in</text>
+<rect class="c-green" x="80" y="160" width="70" height="8" rx="4"/>
+
+<rect class="c-blue med" x="76" y="76" width="14" height="12" rx="3"/>
+<text class="ts m" x="83" y="98">T8</text>
+{% for x in (200, 290, 380, 470) %}
+<rect class="c-blue dotted" x="{{ x }}" y="71" width="10" height="6" rx="2"/>
+{% endfor %}
+<circle class="c-red dotted" cx="115" cy="98" r="9"/>
+
+<line class="stem" x1="565" y1="70" x2="565" y2="92"/>
+<circle class="c-red dotted" cx="565" cy="98" r="11"/>
+<circle class="c-red med" cx="565" cy="98" r="6"/>
+<line class="arr" x1="585" y1="112" x2="585" y2="166" marker-start="url(#arw)" marker-end="url(#arw)"/>
+<text class="ts e" x="581" y="148">9.5 in</text>
+
+<rect class="c-red med" x="594" y="76" width="14" height="12" rx="3"/>
+<text class="ts e" x="590" y="82">T5</text>
+<line class="arr" x1="628" y1="90" x2="628" y2="166" marker-start="url(#arw)" marker-end="url(#arw)"/>
+<text class="ts" x="634" y="128">12 in</text>
+
+<rect class="c-gray dotted" x="226" y="145" width="14" height="8" rx="2"/>
+<rect class="c-gray dotted" x="490" y="145" width="14" height="8" rx="2"/>
+
+<rect class="c-red med" x="40" y="280" width="10" height="16" rx="3"/>
+<text class="ts lg" x="58" y="292">T5</text>
+<circle class="c-red med" cx="104" cy="288" r="6"/>
+<text class="ts lg" x="116" y="292">Halogen</text>
+<circle class="c-red dotted" cx="190" cy="288" r="6"/>
+<text class="ts lg" x="202" y="292">CHE, same height</text>
+<rect class="c-blue med" x="330" y="280" width="10" height="16" rx="3"/>
+<text class="ts lg" x="348" y="292">T8</text>
+<rect class="c-blue dotted" x="394" y="283" width="20" height="10" rx="3"/>
+<text class="ts lg" x="422" y="292">LED strips</text>
+<rect class="c-gray dotted" x="510" y="284" width="14" height="8" rx="2"/>
+<text class="ts lg" x="532" y="292">Govee</text>
+
+<text class="ts m" x="340" y="316">Guard every bulb. Add a high-limit cutoff on the halogen.</text>
+</svg>

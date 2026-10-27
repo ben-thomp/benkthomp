@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 34" role="img"><title>Color key</title><desc>Blue is the cool side, red is the hot side, gray is rock, tan is sand, green is hides, wood, hammock, water and food.</desc>
+{% for cls, x, label in (
+  ("c-blue", 40, "Cool side"),
+  ("c-red", 140, "Hot side"),
+  ("c-gray", 240, "Rock"),
+  ("c-amber", 316, "Sand"),
+  ("c-green", 390, "Hides, wood, hammock, water, food"),
+) %}
+<rect class="{{ cls }}" x="{{ x }}" y="10" width="14" height="14" rx="3"/>
+<text class="ts lg" x="{{ x + 22 }}" y="22">{{ label }}</text>
+{% endfor %}
+</svg>

@@ -12,6 +12,14 @@
   <h1>{{ info.name }}</h1>
   <p class="enclosure-sub">{{ info.species }} &middot; {{ info.desc }}</p>
 
+  {% if info.plans %}
+  <div class="tabs" role="tablist" aria-label="{{ info.name }}">
+    <button class="tab active" role="tab" id="tab-monitoring" aria-controls="panel-monitoring" aria-selected="true" data-panel="monitoring">Monitoring</button>
+    <button class="tab" role="tab" id="tab-plans" aria-controls="panel-plans" aria-selected="false" data-panel="plans" tabindex="-1">{{ info.plans.label }}</button>
+  </div>
+  {% endif %}
+
+  <div id="panel-monitoring" role="tabpanel" aria-labelledby="tab-monitoring">
   <div class="enclosure-stats">
     <div class="stat-card">
       <span class="stat-label">Temperature</span>
@@ -38,6 +46,19 @@
   <div class="chart-container"><canvas id="tempChart"></canvas></div>
   <div class="chart-container"><canvas id="humidityChart"></canvas></div>
   <p class="chart-empty" id="chart-empty" hidden>No readings in this range yet.</p>
+  </div>
+
+  {% if info.plans %}
+  <div id="panel-plans" role="tabpanel" aria-labelledby="tab-plans" hidden>
+    <p class="plans-summary">{{ info.plans.summary }}</p>
+    {% for fig in info.plans.figures %}
+    <figure class="plan">
+      {% if fig.title %}<figcaption>{{ fig.title }}</figcaption>{% endif %}
+      <div class="plan-scroll">{% include "plans/" ~ subject ~ "/" ~ fig.file ~ ".html" %}</div>
+    </figure>
+    {% endfor %}
+  </div>
+  {% endif %}
 </section>
 {% endblock %}
 

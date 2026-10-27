@@ -71,3 +71,28 @@ class TestQueries:
         week = enclosures.get_readings("gregory", hours=96)
         assert len(day) > 250
         assert len(week) < 96 * 12 / 2
+
+
+class TestSummary:
+    def test_none_without_data(self):
+        assert enclosures.get_summary("roxy") is None
+
+    def test_formats_fahrenheit_humidity_and_age(self):
+        reading = _reading(
+            ts=(datetime.now(timezone.utc) - timedelta(minutes=5)).strftime(
+                "%Y-%m-%dT%H:%M:%SZ"
+            ),
+            temp_c=25.0,
+            humidity_pct=55.4,
+        )
+        enclosures.ingest(reading)
+        summary = enclosures.get_summary("gregory")
+        assert summary["temp_f"] == "77.0"
+        assert summary["humidity"] == "55"
+        assert summary["age"] == "5 min ago"
+        assert summary["stale"] is False
+
+    def test_missing_values_stay_none(self):
+        enclosures.ingest(_reading(temp_c=None, humidity_pct=None))
+        summary = enclosures.get_summary("gregory")
+        assert summary["temp_f"] is None and summary["humidity"] is None

@@ -27,6 +27,14 @@ def no_network_github(monkeypatch):
     gh.clear_cache()
 
 
+@pytest.fixture(autouse=True)
+def no_network_pypi(monkeypatch):
+    """Keep PyPI-backed sections off the network."""
+    import benkthomp.pypi as pypi
+
+    monkeypatch.setattr(pypi, "_fetch", lambda name: None)
+
+
 @pytest.fixture
 def app():
     """Create and configure a test Flask app instance."""

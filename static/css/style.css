@@ -59,23 +59,6 @@ a:hover {
   color: #3ea6ff;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links a {
-  color: #f1f1f1;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.nav-links a:hover {
-  color: #3ea6ff;
-  text-decoration: none;
-}
-
 /* Content */
 .content {
   flex: 1;
@@ -130,16 +113,43 @@ a:hover {
 }
 
 /* Project index */
+/* Home page: a narrow column, wide enough for the longest description on one
+   line, with the brand lined up above it. */
+.narrow .nav-container,
+.narrow .content {
+  max-width: 800px;
+}
+
+.home {
+  padding-bottom: 2rem;
+}
+
+.home-section .section-label {
+  margin-top: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
 .project-index {
   list-style: none;
-  margin-top: 1rem;
 }
 
 .project-index li {
   display: grid;
-  grid-template-columns: minmax(10rem, 14rem) 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 9.5rem 1fr;
+  gap: 1rem;
   padding: 0.6rem 0;
+}
+
+.project-meta {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.85rem;
+  color: #aaaaaa;
+  font-variant-numeric: tabular-nums;
+}
+
+.project-meta.is-stale {
+  color: #d9a441;
 }
 
 .project-index a {
@@ -162,10 +172,6 @@ a:hover {
   .project-index li {
     grid-template-columns: 1fr;
     gap: 0.15rem;
-  }
-
-  .nav-links {
-    gap: 1rem;
   }
 }
 

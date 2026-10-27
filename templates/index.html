@@ -2,15 +2,42 @@
 
 {% block title %}benkthomp{% endblock %}
 
+{% block body_class %}narrow{% endblock %}
+
 {% block content %}
-<section class="page-section">
-  <ul class="project-index">
-    {% for project in projects %}
-    <li>
-      <a href="{{ project_url(project) }}">{{ project.name }}</a>
-      <span class="project-index-desc">{{ project.description }}</span>
-    </li>
-    {% endfor %}
-  </ul>
-</section>
+<div class="home">
+  {% for heading, projects in sections %}
+  <section class="home-section">
+    <h2 class="section-label">{{ heading }}</h2>
+    <ul class="project-index">
+      {% for project in projects %}
+      <li>
+        <a href="{{ project_url(project) }}">{{ project.name }}</a>
+        <span class="project-index-desc">{{ project.description }}
+          {% if project.endpoint in summaries %}
+          {% set s = summaries[project.endpoint] %}
+          <span class="project-meta{% if s and s.stale %} is-stale{% endif %}">
+            {% if s %}
+              {% if s.temp_f %}{{ s.temp_f }}°F{% endif %}
+              {% if s.temp_f and s.humidity %}·{% endif %}
+              {% if s.humidity %}{{ s.humidity }}% humidity{% endif %}
+              · {{ s.age }}{% if s.stale %} (stale){% endif %}
+            {% else %}
+              No readings yet
+            {% endif %}
+          </span>
+          {% elif project.pypi %}
+          {% set pkg = packages[project.pypi] %}
+          <span class="project-meta">
+            {% if pkg %}v{{ pkg.version }}{% if pkg.released %} · released {{ pkg.released }}{% endif %}
+            {% else %}Version unavailable{% endif %}
+          </span>
+          {% endif %}
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</div>
 {% endblock %}

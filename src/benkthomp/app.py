@@ -111,9 +111,19 @@ def register_routes(app: Flask) -> None:
 
     @app.route("/roadmap")
     def roadmap():
+        from benkthomp import project_roadmap
+
+        return render_template(
+            "roadmap.html",
+            entries=project_roadmap.get_all(),
+            project_url=project_url,
+        )
+
+    @app.route("/certifications")
+    def certifications():
         from benkthomp.roadmap import get_page_data
 
-        return render_template("roadmap.html", **get_page_data())
+        return render_template("certifications.html", **get_page_data())
 
     @app.route("/api/roadmap/auth", methods=["POST"])
     def roadmap_auth():

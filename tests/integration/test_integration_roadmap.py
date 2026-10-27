@@ -3,19 +3,19 @@
 
 class TestRoadmapRoute:
     def test_roadmap_route_exists(self, roadmap_client):
-        response = roadmap_client.get("/roadmap")
+        response = roadmap_client.get("/certifications")
         assert response.status_code == 200
 
     def test_roadmap_route_returns_html(self, roadmap_client):
-        response = roadmap_client.get("/roadmap")
+        response = roadmap_client.get("/certifications")
         assert response.content_type.startswith("text/html")
 
     def test_roadmap_renders_schedule(self, roadmap_client):
-        response = roadmap_client.get("/roadmap")
+        response = roadmap_client.get("/certifications")
         assert b"SCHEDULE_DATA" in response.data
 
     def test_roadmap_renders_progress_bars(self, roadmap_client):
-        response = roadmap_client.get("/roadmap")
+        response = roadmap_client.get("/certifications")
         assert b"cert-progress-fill" in response.data
 
     def test_nav_links_to_roadmap(self, client):

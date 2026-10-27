@@ -14,6 +14,18 @@ def enclosure_db(tmp_path, monkeypatch):
     monkeypatch.setenv("ENCLOSURE_INGEST_TOKEN", "test-token")
 
 
+@pytest.fixture(autouse=True)
+def no_network_roadmaps(monkeypatch):
+    """Keep project roadmap tests off the network and cache-free."""
+    import benkthomp.project_roadmap as pr
+
+    pr.clear_cache()
+    monkeypatch.delenv("PROJECT_ROADMAP_LOCAL_DIR", raising=False)
+    monkeypatch.setattr(pr, "_fetch_text", lambda repo: None)
+    yield
+    pr.clear_cache()
+
+
 @pytest.fixture
 def app():
     """Create and configure a test Flask app instance."""

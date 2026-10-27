@@ -253,3 +253,52 @@ a:hover {
   text-align: center;
   padding: 2rem 0;
 }
+
+/* Roadmap (per-project status) */
+.pr-list {
+  list-style: none;
+  margin-top: 1.5rem;
+}
+
+.pr-item {
+  padding: 1rem 0;
+  border-top: 1px solid #2a2a2a;
+}
+
+.pr-name {
+  color: #f1f1f1;
+  font-weight: 500;
+}
+
+.pr-name:hover {
+  color: #3ea6ff;
+  text-decoration: none;
+}
+
+.pr-status {
+  color: #888888;
+  margin-top: 0.25rem;
+}
+
+.pr-label {
+  font-size: 0.75rem;
+  color: #aaaaaa;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 0.75rem;
+}
+
+.pr-points {
+  list-style: none;
+  margin-top: 0.25rem;
+}
+
+.pr-points li {
+  color: #f1f1f1;
+  line-height: 1.6;
+}
+
+.pr-points li.pr-done {
+  color: #888888;
+  text-decoration: line-through;
+}

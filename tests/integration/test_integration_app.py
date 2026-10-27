@@ -1,5 +1,7 @@
 """Integration tests for the site shell: home, redirects, static files."""
 
+import re
+
 
 class TestHomeRoute:
     def test_home_route_exists(self, client):
@@ -36,3 +38,12 @@ class TestStaticFiles:
     def test_static_css_accessible(self, client):
         response = client.get("/static/css/style.css")
         assert response.status_code == 200
+
+
+class TestStaticVersioning:
+    def test_static_urls_carry_a_version_that_busts_caches(self, client):
+        data = client.get("/").get_data(as_text=True)
+        assert re.search(r"/static/css/style\.css\?v=\d+", data)
+
+    def test_versioned_static_file_still_served(self, client):
+        assert client.get("/static/css/style.css?v=123").status_code == 200

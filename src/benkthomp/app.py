@@ -40,9 +40,30 @@ def create_app(config: dict[str, Any] | None = None) -> Flask:
     if config:
         app.config.update(config)
 
+    register_static_versioning(app)
     register_routes(app)
 
     return app
+
+
+def register_static_versioning(app: Flask) -> None:
+    """Appends ?v=<file mtime> to static URLs so a deploy busts browser caches.
+
+    Args:
+        app: The Flask application instance to register the URL default on.
+    """
+
+    @app.url_defaults
+    def add_static_version(endpoint: str, values: dict[str, Any]) -> None:
+        filename = values.get("filename")
+        if endpoint != "static" or "v" in values or not filename:
+            return
+        try:
+            values["v"] = int(
+                (Path(app.static_folder or "") / filename).stat().st_mtime
+            )
+        except OSError:
+            pass
 
 
 def register_routes(app: Flask) -> None:

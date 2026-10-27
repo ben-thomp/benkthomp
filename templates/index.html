@@ -4,15 +4,13 @@
 
 {% block content %}
 <section class="page-section">
-  <div class="project-list">
+  <ul class="project-index">
     {% for project in projects %}
-    <a href="{{ project_url(project) }}" class="project-card"
-       {% if project.repo %}target="_blank" rel="noopener"{% endif %}>
-      <div class="project-card-title">{{ project.name }}</div>
-      <div class="project-card-desc">{{ project.description }}</div>
-      {% if project.language %}<span class="project-card-tag">{{ project.language }}</span>{% endif %}
-    </a>
+    <li>
+      <a href="{{ project_url(project) }}"{% if project.repo %} target="_blank" rel="noopener"{% endif %}>{{ project.name }}</a>
+      <span class="project-index-desc">{{ project.description }}</span>
+    </li>
     {% endfor %}
-  </div>
+  </ul>
 </section>
 {% endblock %}

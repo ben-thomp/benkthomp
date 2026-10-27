@@ -6,7 +6,7 @@ from typing import Any
 
 import click
 from dotenv import load_dotenv
-from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask import Flask, abort, jsonify, redirect, render_template, request, url_for
 
 from benkthomp.projects import PROJECTS, project_url
 
@@ -117,6 +117,25 @@ def register_routes(app: Flask) -> None:
             "roadmap.html",
             entries=project_roadmap.get_all(),
             project_url=project_url,
+        )
+
+    @app.route("/projects/<repo>")
+    def project(repo):
+        from benkthomp import github, project_roadmap
+        from benkthomp.projects import find_repo_project
+
+        listed = find_repo_project(repo)
+        if listed is None:
+            abort(404)
+        readme = github.get_text(repo, "README.md")
+        return render_template(
+            "project.html",
+            project=listed,
+            github_url=github.repo_url(repo),
+            roadmap=project_roadmap.get_roadmap(repo),
+            tree=github.get_tree(repo),
+            tree_url=lambda path: github.repo_url(repo, path),
+            readme_html=github.render_markdown(readme, repo) if readme else None,
         )
 
     @app.route("/certifications")

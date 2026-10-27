@@ -15,15 +15,16 @@ def enclosure_db(tmp_path, monkeypatch):
 
 
 @pytest.fixture(autouse=True)
-def no_network_roadmaps(monkeypatch):
-    """Keep project roadmap tests off the network and cache-free."""
-    import benkthomp.project_roadmap as pr
+def no_network_github(monkeypatch):
+    """Keep GitHub-backed pages off the network and cache-free."""
+    import benkthomp.github as gh
 
-    pr.clear_cache()
-    monkeypatch.delenv("PROJECT_ROADMAP_LOCAL_DIR", raising=False)
-    monkeypatch.setattr(pr, "_fetch_text", lambda repo: None)
+    gh.clear_cache()
+    monkeypatch.delenv("PROJECTS_LOCAL_DIR", raising=False)
+    monkeypatch.setattr(gh, "_fetch_text", lambda repo, path: None)
+    monkeypatch.setattr(gh, "_fetch_tree", lambda repo: None)
     yield
-    pr.clear_cache()
+    gh.clear_cache()
 
 
 @pytest.fixture

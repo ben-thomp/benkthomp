@@ -23,9 +23,9 @@ class TestProjectsRedirect:
 
 
 class TestHomeProjects:
-    def test_home_lists_github_repos(self, client):
+    def test_home_links_repos_to_project_pages(self, client):
         data = client.get("/").data
-        assert b"https://github.com/ben-thomp/python-notes" in data
+        assert b'href="/projects/python-notes"' in data
 
     def test_home_lists_site_pages_first(self, client):
         data = client.get("/").data

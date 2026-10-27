@@ -6,7 +6,7 @@ GITHUB_USER = "ben-thomp"
 GITHUB_URL = f"https://github.com/{GITHUB_USER}"
 
 # Each project has a `name` and `description`, plus either an `endpoint` (a page
-# on this site) or a `repo` (a GitHub repository name). Repos may set `language`.
+# on this site) or a `repo` (a GitHub repository name, shown on /projects/<repo>).
 PROJECTS = [
     {
         "name": "Gregory",
@@ -60,7 +60,12 @@ PROJECTS = [
 
 
 def project_url(project: dict[str, str]) -> str:
-    """Returns the on-site URL or GitHub URL for a project."""
+    """Returns the on-site URL for a project (its own page or its repo page)."""
     if "endpoint" in project:
         return url_for(project["endpoint"])
-    return f"{GITHUB_URL}/{project['repo']}"
+    return url_for("project", repo=project["repo"])
+
+
+def find_repo_project(repo: str) -> dict[str, str] | None:
+    """Returns the listed project for a repo name, or None."""
+    return next((p for p in PROJECTS if p.get("repo") == repo), None)

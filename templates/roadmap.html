@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "_roadmap_items.html" import roadmap_items %}
 
 {% block title %}benkthomp - Roadmap{% endblock %}
 
@@ -10,25 +11,9 @@
   <ul class="pr-list">
     {% for entry in entries %}
     <li class="pr-item">
-      <a class="pr-name" href="{{ project_url(entry.project) }}" target="_blank" rel="noopener">{{ entry.project.name }}</a>
+      <a class="pr-name" href="{{ project_url(entry.project) }}">{{ entry.project.name }}</a>
       {% if entry.roadmap %}
-        {% if entry.roadmap.status %}<p class="pr-status">{{ entry.roadmap.status }}</p>{% endif %}
-        {% if entry.roadmap.next_up %}
-        <p class="pr-label">Next up</p>
-        <ul class="pr-points">
-          {% for item in entry.roadmap.next_up %}
-          <li class="{{ 'pr-done' if item.done }}">{{ item.text }}</li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-        {% if entry.roadmap.milestones %}
-        <p class="pr-label">Milestones</p>
-        <ul class="pr-points">
-          {% for item in entry.roadmap.milestones %}
-          <li class="{{ 'pr-done' if item.done }}">{{ '&#9745;'|safe if item.done else '&#9744;'|safe }} {{ item.text }}</li>
-          {% endfor %}
-        </ul>
-        {% endif %}
+        {{ roadmap_items(entry.roadmap) }}
       {% else %}
         <p class="pr-status">No roadmap published yet.</p>
       {% endif %}

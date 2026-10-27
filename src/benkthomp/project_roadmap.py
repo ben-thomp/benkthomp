@@ -1,25 +1,17 @@
 """Per-project roadmaps, read from each repo's ROADMAP.md and cached.
 
 Each repo keeps a ROADMAP.md with the sections Status, Next Up, Backlog,
-Milestones and Decisions. The site fetches those files (public repos only),
-parses them, and keeps the last good copy if GitHub is unreachable.
+Milestones and Decisions. The site reads those files (public repos only) via
+the cached GitHub module and parses them.
 """
 
-import os
 import re
-import time
-import urllib.error
-import urllib.request
 from concurrent.futures import ThreadPoolExecutor
-from pathlib import Path
 from typing import Any
 
-from benkthomp.projects import GITHUB_USER, PROJECTS
+from benkthomp import github
+from benkthomp.projects import PROJECTS
 
-CACHE_TTL_SECONDS = 3600
-FETCH_TIMEOUT_SECONDS = 5
-
-_RAW_URL = "https://raw.githubusercontent.com/{user}/{repo}/HEAD/ROADMAP.md"
 _SECTIONS = {
     "status": "status",
     "next up": "next_up",
@@ -28,9 +20,6 @@ _SECTIONS = {
     "decisions": "decisions",
 }
 _ITEM = re.compile(r"^\s*[-*]\s*(\[(?P<box>[ xX])\])?\s*(?P<text>.*)$")
-
-# repo -> (fetched_at, parsed roadmap or None)
-_cache: dict[str, tuple[float, dict[str, Any] | None]] = {}
 
 
 def parse_roadmap(text: str) -> dict[str, Any]:
@@ -79,38 +68,10 @@ def parse_roadmap(text: str) -> dict[str, Any]:
     return result
 
 
-def _fetch_text(repo: str) -> str | None:
-    """Returns a repo's ROADMAP.md text, or None if unavailable."""
-    local_dir = os.environ.get("PROJECT_ROADMAP_LOCAL_DIR")
-    if local_dir:
-        path = Path(local_dir) / repo / "ROADMAP.md"
-        return path.read_text(encoding="utf-8") if path.is_file() else None
-    url = _RAW_URL.format(user=GITHUB_USER, repo=repo)
-    try:
-        with urllib.request.urlopen(url, timeout=FETCH_TIMEOUT_SECONDS) as resp:
-            return resp.read().decode("utf-8")
-    except (urllib.error.URLError, TimeoutError, UnicodeDecodeError):
-        return None
-
-
 def get_roadmap(repo: str) -> dict[str, Any] | None:
-    """Returns the parsed roadmap for a repo, cached for CACHE_TTL_SECONDS.
-
-    If a refresh fails, the previous copy (if any) is kept and retried later.
-    """
-    now = time.monotonic()
-    cached = _cache.get(repo)
-    if cached and now - cached[0] < CACHE_TTL_SECONDS:
-        return cached[1]
-    text = _fetch_text(repo)
-    if text is None:
-        previous = cached[1] if cached else None
-        # Retry sooner than a full TTL when GitHub or the file is unavailable.
-        _cache[repo] = (now - CACHE_TTL_SECONDS + 300, previous)
-        return previous
-    parsed = parse_roadmap(text)
-    _cache[repo] = (now, parsed)
-    return parsed
+    """Returns the parsed ROADMAP.md for a repo, or None if unavailable."""
+    text = github.get_text(repo, "ROADMAP.md")
+    return None if text is None else parse_roadmap(text)
 
 
 def get_all() -> list[dict[str, Any]]:
@@ -119,8 +80,3 @@ def get_all() -> list[dict[str, Any]]:
     with ThreadPoolExecutor(max_workers=8) as pool:
         roadmaps = list(pool.map(lambda p: get_roadmap(p["repo"]), projects))
     return [{"project": p, "roadmap": r} for p, r in zip(projects, roadmaps)]
-
-
-def clear_cache() -> None:
-    """Empties the cache (used by tests)."""
-    _cache.clear()

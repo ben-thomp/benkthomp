@@ -7,7 +7,7 @@
   <ul class="project-index">
     {% for project in projects %}
     <li>
-      <a href="{{ project_url(project) }}"{% if project.repo %} target="_blank" rel="noopener"{% endif %}>{{ project.name }}</a>
+      <a href="{{ project_url(project) }}">{{ project.name }}</a>
       <span class="project-index-desc">{{ project.description }}</span>
     </li>
     {% endfor %}

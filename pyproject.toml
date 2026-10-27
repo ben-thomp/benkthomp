@@ -10,6 +10,7 @@ dependencies = [
     "python-dotenv>=1.0.0",
     "gunicorn>=21.2.0",
     "ruamel.yaml>=0.18.0",
+    "markdown-it-py>=3.0.0",
 ]
 
 [project.optional-dependencies]

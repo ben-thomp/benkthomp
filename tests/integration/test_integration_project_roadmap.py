@@ -1,6 +1,6 @@
 """Integration tests for the /roadmap page built from project ROADMAP.md files."""
 
-import benkthomp.project_roadmap as pr
+import benkthomp.github as gh
 
 ROADMAP = """# demo
 
@@ -26,7 +26,7 @@ class TestRoadmapPage:
         assert b"No roadmap published yet." in response.data
 
     def test_shows_status_next_up_and_milestones(self, client, monkeypatch):
-        monkeypatch.setattr(pr, "_fetch_text", lambda repo: ROADMAP)
+        monkeypatch.setattr(gh, "_fetch_text", lambda repo, path: ROADMAP)
         data = client.get("/roadmap").data
         assert b"Ongoing development." in data
         assert b"Ship the thing" in data
@@ -36,3 +36,7 @@ class TestRoadmapPage:
         data = client.get("/roadmap").data
         assert b"Gregory" not in data
         assert b"Roxy" not in data
+
+    def test_names_link_to_project_pages(self, client):
+        data = client.get("/roadmap").data
+        assert b'href="/projects/python-notes"' in data

@@ -1,9 +1,7 @@
 """Unit tests for ROADMAP.md parsing, caching and fallback."""
 
+import benkthomp.github as gh
 import benkthomp.project_roadmap as pr
-
-# Captured at import, before the autouse fixture stubs it out.
-REAL_FETCH_TEXT = pr._fetch_text
 
 SAMPLE = """# demo
 
@@ -64,27 +62,11 @@ class TestGetRoadmap:
     def test_returns_none_when_unavailable(self):
         assert pr.get_roadmap("missing") is None
 
-    def test_caches_within_ttl(self, monkeypatch):
-        calls = []
-        monkeypatch.setattr(
-            pr, "_fetch_text", lambda repo: calls.append(repo) or SAMPLE
-        )
-        pr.get_roadmap("demo")
-        pr.get_roadmap("demo")
-        assert calls == ["demo"]
-
-    def test_keeps_last_good_copy_when_refresh_fails(self, monkeypatch):
-        monkeypatch.setattr(pr, "_fetch_text", lambda repo: SAMPLE)
-        first = pr.get_roadmap("demo")
-        pr._cache["demo"] = (0.0, first)  # force expiry
-        monkeypatch.setattr(pr, "_fetch_text", lambda repo: None)
-        assert pr.get_roadmap("demo") == first
-
-    def test_local_dir_override(self, tmp_path, monkeypatch):
-        (tmp_path / "demo").mkdir()
-        (tmp_path / "demo" / "ROADMAP.md").write_text(SAMPLE, encoding="utf-8")
-        monkeypatch.setattr(pr, "_fetch_text", REAL_FETCH_TEXT)
-        monkeypatch.setenv("PROJECT_ROADMAP_LOCAL_DIR", str(tmp_path))
-        pr.clear_cache()
+    def test_parses_fetched_text(self, monkeypatch):
+        monkeypatch.setattr(gh, "_fetch_text", lambda repo, path: SAMPLE)
         assert pr.get_roadmap("demo")["title"] == "demo"
-        assert pr.get_roadmap("absent") is None
+
+    def test_only_projects_with_a_repo_are_listed(self):
+        names = [e["project"]["name"] for e in pr.get_all()]
+        assert "python-notes" in names
+        assert "Gregory" not in names

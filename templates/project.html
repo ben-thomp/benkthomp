@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% from "_roadmap_items.html" import roadmap_items %}
+
+{% block title %}benkthomp - {{ project.name }}{% endblock %}
+
+{% macro tree_nodes(nodes) %}
+  <ul class="file-tree">
+    {% for node in nodes %}
+    <li>
+      {% if node.truncated %}
+        <span class="file-more">… more files on GitHub</span>
+      {% elif node.is_dir %}
+        <details>
+          <summary>{{ node.name }}/</summary>
+          {{ tree_nodes(node.children) }}
+        </details>
+      {% else %}
+        <a href="{{ tree_url(node.path) }}" target="_blank" rel="noopener">{{ node.name }}</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% block content %}
+<section class="page-section">
+  <h1>{{ project.name }}</h1>
+  <p>{{ project.description }}</p>
+  <p class="project-links"><a href="{{ github_url }}" target="_blank" rel="noopener">View on GitHub &rarr;</a></p>
+
+  <h2 class="project-heading">Roadmap</h2>
+  {% if roadmap %}
+    {{ roadmap_items(roadmap) }}
+  {% else %}
+    <p class="pr-status">No roadmap published yet.</p>
+  {% endif %}
+
+  <h2 class="project-heading">Files</h2>
+  {% if tree %}
+    {{ tree_nodes(tree) }}
+  {% else %}
+    <p class="pr-status">File list unavailable right now.</p>
+  {% endif %}
+
+  <h2 class="project-heading">README</h2>
+  {% if readme_html %}
+    <div class="markdown">{{ readme_html | safe }}</div>
+  {% else %}
+    <p class="pr-status">No README yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -48,7 +48,7 @@ a:hover {
 }
 
 .nav-brand {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #f1f1f1;
@@ -66,8 +66,9 @@ a:hover {
 }
 
 .nav-links a {
-  color: #888888;
-  font-size: 0.95rem;
+  color: #f1f1f1;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .nav-links a:hover {
@@ -142,11 +143,16 @@ a:hover {
 }
 
 .project-index a {
-  font-weight: 600;
+  color: #f1f1f1;
+  font-weight: 500;
+}
+
+.project-index a:hover {
+  color: #3ea6ff;
+  text-decoration: none;
 }
 
 .project-index-desc {
-  font-size: 0.9rem;
   color: #888888;
   line-height: 1.5;
 }

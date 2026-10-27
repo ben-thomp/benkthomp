@@ -21,13 +21,6 @@ PROJECTS = [
         "endpoint": "roxy",
     },
     {
-        "name": "Certification Roadmap",
-        "description": "Interactive study calendar tracking Gen AI and CPCU 555 "
-        "certification progress — Gantt timeline, month-by-month calendar, and "
-        "per-certification progress bars.",
-        "endpoint": "roadmap",
-    },
-    {
         "name": "python-clipboard",
         "description": "Clipboard manager inspired by CLCL.",
         "repo": "python-clipboard",

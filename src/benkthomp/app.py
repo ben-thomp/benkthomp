@@ -8,7 +8,7 @@ import click
 from dotenv import load_dotenv
 from flask import Flask, abort, jsonify, redirect, render_template, request, url_for
 
-from benkthomp.projects import PROJECTS, project_url
+from benkthomp.projects import PROJECTS, grouped_projects, project_url
 
 load_dotenv()
 
@@ -75,7 +75,21 @@ def register_routes(app: Flask) -> None:
 
     @app.route("/")
     def index():
-        return render_template("index.html", projects=PROJECTS, project_url=project_url)
+        from benkthomp import enclosures, pypi
+
+        summaries = {
+            p["endpoint"]: enclosures.get_summary(p["endpoint"])
+            for p in PROJECTS
+            if p.get("section") == "enclosures"
+        }
+        packages = pypi.get_packages([p["pypi"] for p in PROJECTS if "pypi" in p])
+        return render_template(
+            "index.html",
+            sections=grouped_projects(),
+            project_url=project_url,
+            summaries=summaries,
+            packages=packages,
+        )
 
     @app.route("/projects")
     def projects():

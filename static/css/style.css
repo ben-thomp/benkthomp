@@ -130,16 +130,38 @@ a:hover {
 }
 
 /* Project index */
+.home {
+  max-width: 720px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.home-section .section-label {
+  margin-top: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
 .project-index {
   list-style: none;
-  margin-top: 1rem;
 }
 
 .project-index li {
   display: grid;
-  grid-template-columns: minmax(10rem, 14rem) 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 9.5rem 1fr;
+  gap: 1rem;
   padding: 0.6rem 0;
+}
+
+.project-meta {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.85rem;
+  color: #aaaaaa;
+  font-variant-numeric: tabular-nums;
+}
+
+.project-meta.is-stale {
+  color: #d9a441;
 }
 
 .project-index a {

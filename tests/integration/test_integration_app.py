@@ -47,3 +47,29 @@ class TestStaticVersioning:
 
     def test_versioned_static_file_still_served(self, client):
         assert client.get("/static/css/style.css?v=123").status_code == 200
+
+
+class TestHomeSections:
+    def test_sections_are_grouped_in_order(self, client):
+        data = client.get("/").get_data(as_text=True)
+        assert (
+            data.index("Enclosures") < data.index("Packages") < data.index("Site</h2>")
+        )
+        assert data.index("Gregory") < data.index("python-clipboard")
+        assert data.index("python-sdlc") < data.rindex("Roadmap</a>")
+
+    def test_enclosures_show_latest_reading_or_a_placeholder(self, client):
+        assert "No readings yet" in client.get("/").get_data(as_text=True)
+
+    def test_packages_show_version_and_release_date(self, client, monkeypatch):
+        import benkthomp.pypi as pypi
+
+        monkeypatch.setattr(
+            pypi, "_fetch", lambda n: {"version": "1.2.0", "released": "2026-04-02"}
+        )
+        data = client.get("/").get_data(as_text=True)
+        assert "v1.2.0 · released 2026-04-02" in data
+
+    def test_missing_pypi_data_does_not_break_the_page(self, client):
+        data = client.get("/").get_data(as_text=True)
+        assert "Version unavailable" in data

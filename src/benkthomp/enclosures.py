@@ -178,6 +178,34 @@ def get_latest(subject: str) -> dict[str, Any] | None:
     return reading
 
 
+def _age_text(seconds: float) -> str:
+    minutes = int(seconds // 60)
+    if minutes < 1:
+        return "just now"
+    if minutes < 60:
+        return f"{minutes} min ago"
+    if minutes < 24 * 60:
+        return f"{minutes // 60} hr ago"
+    return f"{minutes // (24 * 60)} d ago"
+
+
+def get_summary(subject: str) -> dict[str, Any] | None:
+    """Returns display text for the newest reading (°F, %, age), or None."""
+    reading = get_latest(subject)
+    if reading is None:
+        return None
+    age = datetime.now(timezone.utc) - datetime.strptime(
+        reading["ts"], "%Y-%m-%dT%H:%M:%SZ"
+    ).replace(tzinfo=timezone.utc)
+    temp_c, humidity = reading["temp_c"], reading["humidity_pct"]
+    return {
+        "temp_f": None if temp_c is None else f"{temp_c * 9 / 5 + 32:.1f}",
+        "humidity": None if humidity is None else f"{humidity:.0f}",
+        "age": _age_text(age.total_seconds()),
+        "stale": reading["stale"],
+    }
+
+
 def get_readings(subject: str, hours: int = 24) -> list[dict[str, Any]]:
     """Returns readings from the last `hours`, oldest first.
 

@@ -1,4 +1,4 @@
-"""Tests for enclosure readings: ingest API, queries, and pages."""
+"""Integration tests for the enclosure ingest API, readings API, and pages."""
 
 from datetime import datetime, timedelta, timezone
 

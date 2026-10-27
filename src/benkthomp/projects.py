@@ -72,7 +72,7 @@ PROJECTS = [
     },
     {
         "name": "Roadmap",
-        "description": "What each project is working on and what comes next.",
+        "description": "What is being worked on and what is coming next in each project.",
         "endpoint": "roadmap",
         "section": "site",
     },

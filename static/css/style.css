@@ -59,23 +59,6 @@ a:hover {
   color: #3ea6ff;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links a {
-  color: #f1f1f1;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.nav-links a:hover {
-  color: #3ea6ff;
-  text-decoration: none;
-}
-
 /* Content */
 .content {
   flex: 1;
@@ -130,9 +113,14 @@ a:hover {
 }
 
 /* Project index */
+/* Home page: a narrow column, wide enough for the longest description on one
+   line, with the brand lined up above it. */
+.narrow .nav-container,
+.narrow .content {
+  max-width: 800px;
+}
+
 .home {
-  max-width: 720px;
-  margin: 0 auto;
   padding-bottom: 2rem;
 }
 
@@ -184,10 +172,6 @@ a:hover {
   .project-index li {
     grid-template-columns: 1fr;
     gap: 0.15rem;
-  }
-
-  .nav-links {
-    gap: 1rem;
   }
 }
 

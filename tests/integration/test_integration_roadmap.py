@@ -18,9 +18,9 @@ class TestRoadmapRoute:
         response = roadmap_client.get("/certifications")
         assert b"cert-progress-fill" in response.data
 
-    def test_nav_links_to_roadmap(self, client):
-        response = client.get("/")
-        assert b'href="/roadmap"' in response.data
+    def test_home_links_to_roadmap_but_nav_does_not(self, client):
+        assert b'href="/roadmap"' in client.get("/").data
+        assert b'href="/roadmap"' not in client.get("/gregory").data
 
 
 class TestRoadmapAPI:

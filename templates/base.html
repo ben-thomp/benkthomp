@@ -7,13 +7,10 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   {% block extra_head %}{% endblock %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
   <nav class="navbar">
     <div class="nav-container">
       <a href="{{ url_for('index') }}" class="nav-brand">benkthomp</a>
-      <ul class="nav-links">
-        <li><a href="{{ url_for('roadmap') }}">Roadmap</a></li>
-      </ul>
     </div>
   </nav>
 

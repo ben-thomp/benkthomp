@@ -103,7 +103,7 @@ def _fetch_tree(repo: str) -> list[dict[str, str]] | None:
     return [{"path": e["path"], "type": e["type"]} for e in tree]
 
 
-def _cached(kind: str, repo: str, path: str, fetch: Any) -> Any:
+def cached(kind: str, repo: str, path: str, fetch: Any) -> Any:
     """Returns fetch()'s value, cached; on failure keeps the previous value."""
     key = (kind, repo, path)
     now = time.monotonic()
@@ -122,7 +122,7 @@ def _cached(kind: str, repo: str, path: str, fetch: Any) -> Any:
 
 def get_text(repo: str, path: str) -> str | None:
     """Returns a cached text file from a repo, or None if never available."""
-    return _cached("text", repo, path, lambda: _fetch_text(repo, path))
+    return cached("text", repo, path, lambda: _fetch_text(repo, path))
 
 
 def get_tree(repo: str) -> list[dict[str, Any]] | None:
@@ -131,7 +131,7 @@ def get_tree(repo: str) -> list[dict[str, Any]] | None:
     Each node is {"name", "path", "is_dir", "children"}. Trees over
     MAX_TREE_ENTRIES entries are cut off and flagged by a final "truncated" node.
     """
-    entries = _cached("tree", repo, "", lambda: _fetch_tree(repo))
+    entries = cached("tree", repo, "", lambda: _fetch_tree(repo))
     return None if entries is None else build_tree(entries)
 
 

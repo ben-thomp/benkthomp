@@ -2,7 +2,24 @@
 
 import benkthomp.github as gh
 
-ROADMAP = """# demo
+README = """# demo
+
+A small demo project.
+
+## Roadmap
+
+- [ ] Ship the thing
+- [x] Write the plan
+
+### Backlog
+
+- Later idea
+
+## Decisions
+
+- **Flask**: simple
+"""
+LEGACY = """# demo
 
 ## Status
 
@@ -10,7 +27,7 @@ Ongoing development.
 
 ## Next Up
 
-- [ ] Ship the thing
+- [ ] Ship the legacy thing
 
 ## Milestones
 
@@ -25,12 +42,23 @@ class TestRoadmapPage:
         assert b"python-notes" in response.data
         assert b"No roadmap published yet." in response.data
 
-    def test_shows_status_next_up_and_milestones(self, client, monkeypatch):
-        monkeypatch.setattr(gh, "_fetch_text", lambda repo, path: ROADMAP)
+    def test_shows_current_work_from_the_readme_without_status(
+        self, client, monkeypatch
+    ):
+        files = {"README.md": README}
+        monkeypatch.setattr(gh, "_fetch_text", lambda repo, path: files.get(path))
         data = client.get("/roadmap").data
-        assert b"Ongoing development." in data
-        assert b"Ship the thing" in data
-        assert b"v0.1" in data
+        assert b"Ship the thing" in data and b"Write the plan" in data
+        assert b"Later idea" not in data and b"Flask" not in data
+        assert b"Status" not in data and b"Milestones" not in data
+
+    def test_falls_back_to_roadmap_md_and_hides_its_status(self, client, monkeypatch):
+        files = {"ROADMAP.md": LEGACY}
+        monkeypatch.setattr(gh, "_fetch_text", lambda repo, path: files.get(path))
+        data = client.get("/roadmap").data
+        assert b"Ship the legacy thing" in data
+        assert b"Ongoing development." not in data
+        assert b"v0.1" not in data
 
     def test_site_pages_without_a_repo_are_not_listed(self, client):
         data = client.get("/roadmap").data

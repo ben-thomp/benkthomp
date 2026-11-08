@@ -163,6 +163,8 @@ def register_routes(app: Flask) -> None:
         if listed is None:
             abort(404)
         readme = github.get_text(repo, "README.md")
+        if readme:
+            readme = project_roadmap.strip_roadmap_sections(readme)
         return render_template(
             "project.html",
             project=listed,

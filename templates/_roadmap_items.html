@@ -1,20 +1,12 @@
-{# Status, next-up and milestone lists for one parsed ROADMAP.md. #}
+{# Current work for one parsed roadmap. #}
 {% macro roadmap_items(roadmap) %}
-  {% if roadmap.status %}<p class="pr-status">{{ roadmap.status }}</p>{% endif %}
-  {% if roadmap.next_up %}
-  <p class="pr-label">Next up</p>
+  {% if roadmap.current %}
   <ul class="pr-points">
-    {% for item in roadmap.next_up %}
-    <li class="{{ 'pr-done' if item.done }}">{{ item.text }}</li>
+    {% for item in roadmap.current %}
+    <li class="{{ 'pr-done' if item.done }}">{% if item.done is not none %}{{ '&#9745;'|safe if item.done else '&#9744;'|safe }} {% endif %}{{ item.text }}</li>
     {% endfor %}
   </ul>
-  {% endif %}
-  {% if roadmap.milestones %}
-  <p class="pr-label">Milestones</p>
-  <ul class="pr-points">
-    {% for item in roadmap.milestones %}
-    <li class="{{ 'pr-done' if item.done }}">{{ '&#9745;'|safe if item.done else '&#9744;'|safe }} {{ item.text }}</li>
-    {% endfor %}
-  </ul>
+  {% else %}
+  <p class="pr-status">Nothing planned yet.</p>
   {% endif %}
 {% endmacro %}

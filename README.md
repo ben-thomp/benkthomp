@@ -90,3 +90,12 @@ This project is configured for deployment on [Render](https://render.com) via `r
 - **Testing**: pytest
 - **Code Quality**: Black, Ruff, Mypy
 - **Deployment**: Render with Gunicorn
+
+## Roadmap
+
+- [x] Gregory and Roxy temperature and humidity pages, fed by the ingest API
+- [ ] v1.0: polished site with all intended sections complete
+
+## Decisions
+
+- **Flask on Render**: simple stack, free tier hosting sufficient

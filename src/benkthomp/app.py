@@ -102,7 +102,7 @@ def register_routes(app: Flask) -> None:
             "enclosure.html",
             subject=subject,
             info=enclosures.SUBJECTS[subject],
-            latest=enclosures.get_latest(subject),
+            latest=enclosures.get_latest_by_zone(subject),
         )
 
     for _subject in ("gregory", "roxy"):
@@ -143,6 +143,21 @@ def register_routes(app: Flask) -> None:
         from benkthomp import enclosures
 
         click.echo(f"Seeded {enclosures.seed_demo()} demo readings.")
+
+    @app.cli.command("assign-zone")
+    @click.argument("subject")
+    @click.argument("zone")
+    def assign_zone(subject, zone):
+        """Move SUBJECT's readings that have no zone into ZONE (e.g. hot)."""
+        from benkthomp import enclosures
+
+        if subject not in enclosures.SUBJECTS:
+            raise click.BadParameter(f"unknown subject {subject!r}")
+        try:
+            moved = enclosures.assign_zone(subject, zone)
+        except ValueError as exc:
+            raise click.BadParameter(str(exc)) from None
+        click.echo(f"Moved {moved} {subject} readings into zone {zone!r}.")
 
     @app.route("/roadmap")
     def roadmap():

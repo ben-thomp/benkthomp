@@ -18,9 +18,13 @@
           {% set s = summaries[project.endpoint] %}
           <span class="project-meta{% if s and s.stale %} is-stale{% endif %}">
             {% if s %}
-              {% if s.temp_f %}{{ s.temp_f }}°F{% endif %}
-              {% if s.temp_f and s.humidity %}·{% endif %}
-              {% if s.humidity %}{{ s.humidity }}% humidity{% endif %}
+              {% for z in s.zones %}
+                {% if z.label %}{{ z.label }}{% endif %}
+                {% if z.temp_f %}{{ z.temp_f }}°F{% endif %}
+                {% if z.temp_f and z.humidity %}·{% endif %}
+                {% if z.humidity %}{{ z.humidity }}%{% if s.zones|length == 1 %} humidity{% endif %}{% endif %}
+                {% if not loop.last %}/{% endif %}
+              {% endfor %}
               · {{ s.age }}{% if s.stale %} (stale){% endif %}
             {% else %}
               No readings yet

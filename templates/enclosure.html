@@ -20,17 +20,9 @@
   {% endif %}
 
   <div id="panel-monitoring" role="tabpanel" aria-labelledby="tab-monitoring">
-  <div class="enclosure-stats">
-    <div class="stat-card">
-      <span class="stat-label">Temperature</span>
-      <span class="stat-value" id="current-temp">--</span>
-      <span class="stat-note" id="current-temp-c"></span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-label">Humidity</span>
-      <span class="stat-value" id="current-humidity">--</span>
-    </div>
-    <div class="stat-card">
+  <div class="enclosure-stats" id="enclosure-stats">
+    {# One card per zone (hot side, cool side) is added here by enclosure.js. #}
+    <div class="stat-card" id="last-updated-card">
       <span class="stat-label">Last updated</span>
       <span class="stat-value" id="last-updated">--</span>
       <span class="stat-note" id="last-updated-note"></span>
